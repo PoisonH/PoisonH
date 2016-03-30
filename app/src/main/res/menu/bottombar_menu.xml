@@ -11,7 +11,7 @@
         android:title="蓝牙"/>
     <item
         android:id="@+id/bb_menu_nearby"
-        android:icon="@drawable/yinyue"
+        android:icon="@drawable/yinle"
         android:title="音乐"/>
     <item
         android:id="@+id/bb_menu_friends"
