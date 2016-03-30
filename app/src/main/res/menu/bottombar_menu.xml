@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bb_menu_recents"
+        android:icon="@drawable/xinwen"
+        android:title="新闻"/>
+    <item
+        android:id="@+id/bb_menu_favorites"
+        android:icon="@drawable/lanya"
+        android:title="蓝牙"/>
+    <item
+        android:id="@+id/bb_menu_nearby"
+        android:icon="@drawable/yinyue"
+        android:title="音乐"/>
+    <item
+        android:id="@+id/bb_menu_friends"
+        android:icon="@drawable/shipin"
+        android:title="视频"/>
+    <item
+        android:id="@+id/bb_menu_food"
+        android:icon="@drawable/location"
+        android:title="定位"/>
+</menu>
