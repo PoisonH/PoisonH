@@ -7,11 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.poisonh.poisonh.R;
+import com.poisonh.poisonh.base.BaseFragment;
 
 /**
  * Created by Administrator on 2016/3/30.
  */
-public class MusicFragment extends Fragment
+public class MusicFragment extends BaseFragment
 {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
