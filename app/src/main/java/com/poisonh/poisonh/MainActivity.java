@@ -20,7 +20,6 @@ import com.roughike.bottombar.OnMenuTabClickListener;
 
 public class MainActivity extends BaseActivity
 {
-    private Toolbar mToolbar;
     private BottomBar mBottomBar;
 
     private FragmentManager mFragmentManager = null;
@@ -35,11 +34,6 @@ public class MainActivity extends BaseActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        mToolbar.setTitle("PoisonH");
-        mToolbar.setTitleTextColor(getResources().getColor(R.color.white));
         mFragmentManager = getSupportFragmentManager();
         setTabSelection(0);
 
@@ -160,23 +154,18 @@ public class MainActivity extends BaseActivity
         switch (index)
         {
             case R.id.bb_menu_news:
-                mToolbar.setBackgroundColor(getResources().getColor(R.color.colortab1));
                 StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colortab1));
                 break;
             case R.id.bb_menu_bluetooth:
-                mToolbar.setBackgroundColor(getResources().getColor(R.color.colortab2));
                 StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colortab2));
                 break;
             case R.id.bb_menu_music:
-                mToolbar.setBackgroundColor(getResources().getColor(R.color.colortab3));
                 StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colortab3));
                 break;
             case R.id.bb_menu_vedio:
-                mToolbar.setBackgroundColor(getResources().getColor(R.color.colortab4));
                 StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colortab4));
                 break;
             case R.id.bb_menu_location:
-                mToolbar.setBackgroundColor(getResources().getColor(R.color.colortab5));
                 StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colortab5));
                 break;
             default:
