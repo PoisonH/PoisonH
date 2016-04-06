@@ -2,8 +2,6 @@ package com.poisonh.poisonh.adapter;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.Spanned;
@@ -79,8 +77,8 @@ public class ListDataRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             {
                 return;
             }
-//            Uri mPicUri = Uri.parse(mList.get(position).getPicurl());
-//            ((RecyclerHolder) holder).sdv_imageview.setImageURI(mPicUri);
+            Uri mPicUri = Uri.parse(mList.get(position).getPicurl());
+            ((RecyclerHolder) holder).sdv_imageview.setImageURI(mPicUri);
             ((RecyclerHolder) holder).tv_title.setText(mList.get(position).getTitle());
             Spanned txt = Html.fromHtml(mList.get(position).getDescription());
             ((RecyclerHolder) holder).tv_description.setText(txt);
@@ -123,7 +121,7 @@ public class ListDataRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public static class RecyclerHolder extends RecyclerView.ViewHolder
     {
-      //  public SimpleDraweeView sdv_imageview;
+        public SimpleDraweeView sdv_imageview;
         public TextView tv_title;
         public TextView tv_description;
         public TextView tv_pubDate;
@@ -131,7 +129,7 @@ public class ListDataRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         public RecyclerHolder(View view)
         {
             super(view);
-          //  sdv_imageview = (SimpleDraweeView) itemView.findViewById(R.id.sdv_imageview);
+            sdv_imageview = (SimpleDraweeView) itemView.findViewById(R.id.sdv);
             tv_title = (TextView) itemView.findViewById(R.id.tv_title);
             tv_description = (TextView) itemView.findViewById(R.id.tv_description);
             tv_pubDate = (TextView) itemView.findViewById(R.id.tv_pubDate);
@@ -142,10 +140,6 @@ public class ListDataRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     {
         mList.addAll(mList.size(), lists);
         this.notifyDataSetChanged();
-
-//        Message msg = Message.obtain();
-//        msg.what = 0;
-//        saveDataHanler.sendMessage(msg);
     }
 
     public List<DataList> getData()
@@ -165,18 +159,4 @@ public class ListDataRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     {
         this.mStrFileName = mStrFileName;
     }
-//
-//    Handler saveDataHanler = new Handler()
-//    {
-//        @Override
-//        public void handleMessage(Message msg)
-//        {
-//            switch (msg.what)
-//            {
-//                case 0:
-//                    CacheManager.saveObject(mContext, mList, mStrFileName);
-//                    break;
-//            }
-//        }
-//    };
 }

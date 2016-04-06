@@ -1,13 +1,17 @@
 package com.poisonh.poisonh.fragment.newsfragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.poisonh.poisonh.R;
+import com.poisonh.poisonh.WebViewActivity;
 import com.poisonh.poisonh.adapter.ListDataRVAdapter;
 import com.poisonh.poisonh.base.BaseFragment;
 import com.poisonh.poisonh.bean.DataList;
@@ -77,9 +81,9 @@ public class ListNewsFragment extends BaseFragment implements NewsHealthDataView
         {
             pageIndex = 1;
             showProgress();
-            ToastUtils.showToast(getActivity(), "删除缓存", Toast.LENGTH_SHORT);
             mAdapter.cleanListData();
             mPresenter.loadDataList(catid, pageIndex);
+            ToastUtils.showToast(getActivity(), "刷新成功", Toast.LENGTH_SHORT);
         }
 
         @Override
@@ -135,7 +139,10 @@ public class ListNewsFragment extends BaseFragment implements NewsHealthDataView
     @Override
     public void onItemClick(View view, int position)
     {
-
+        Intent mIntent = new Intent();
+        mIntent.setClass(getContext(), WebViewActivity.class);
+        mIntent.putExtra("id", mAdapter.getData().get(position).getId() + "");
+        startActivity(mIntent);
     }
 
     @Override

@@ -13,10 +13,27 @@ public class RequestURL
     /**
      * 文章地址
      */
-    public static String ARTICLEURL="http://m.ys137.com/article_";
+    public static String ARTICLEURL = "http://m.ys137.com/article_";
 
     /**
      *
      */
     public static int PAGESIZE = 10;
+    /**
+     * 时令
+     */
+    public static int SEASON = 7;
+    /**
+     * 运动
+     */
+    public static int EXERCISE = 2;
+    /**
+     * 焦点
+     */
+    public static int FOCUS = 0;
+
+    /**
+     * 美容
+     */
+    public static int HAIRDRESSING = 103;
 }

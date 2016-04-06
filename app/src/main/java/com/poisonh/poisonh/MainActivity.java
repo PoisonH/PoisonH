@@ -156,13 +156,13 @@ public class MainActivity extends BaseActivity
             case R.id.bb_menu_news:
                 StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colortab1));
                 break;
-            case R.id.bb_menu_bluetooth:
+            case R.id.bb_menu_vedio:
                 StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colortab2));
                 break;
-            case R.id.bb_menu_music:
+            case R.id.bb_menu_bluetooth:
                 StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colortab3));
                 break;
-            case R.id.bb_menu_vedio:
+            case R.id.bb_menu_music:
                 StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colortab4));
                 break;
             case R.id.bb_menu_location:

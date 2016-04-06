@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.poisonh.poisonh.R;
 import com.poisonh.poisonh.adapter.ViewPagerAdapter;
+import com.poisonh.poisonh.api.RequestURL;
 import com.poisonh.poisonh.base.BaseFragment;
 import com.poisonh.poisonh.fragment.newsfragment.ListNewsFragment;
 
@@ -38,17 +39,17 @@ public class NewsFragment extends BaseFragment
         mViewPager = (ViewPager) view.findViewById(R.id.vp_viewpager);
         mViewPager.setOffscreenPageLimit(4);
         mTabLayout.setBackgroundColor(getResources().getColor(R.color.colortab1));
-        mList.add(ListNewsFragment.newInstance(0));
-        mList.add(ListNewsFragment.newInstance(7));
-        mList.add(ListNewsFragment.newInstance(2));
-        mList.add(ListNewsFragment.newInstance(4));
+        mList.add(ListNewsFragment.newInstance(RequestURL.FOCUS));
+        mList.add(ListNewsFragment.newInstance(RequestURL.SEASON));
+        mList.add(ListNewsFragment.newInstance(RequestURL.EXERCISE));
+        mList.add(ListNewsFragment.newInstance(RequestURL.HAIRDRESSING));
 
         mViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager(), getActivity().getApplicationContext(), mList));
         //  mTabLayout.setViewPager(mViewPager);
         mTabLayout.addTab(mTabLayout.newTab().setText("热点"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("国内"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("国外"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("健康"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("时令"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("运动"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("美容"));
         mTabLayout.setupWithViewPager(mViewPager);
         //设置未选中和选中的字体颜色
         mTabLayout.setTabTextColors(getResources().getColor(R.color.huise), getResources().getColor(R.color.white));
