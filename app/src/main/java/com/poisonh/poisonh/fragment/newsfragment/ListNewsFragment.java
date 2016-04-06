@@ -2,9 +2,6 @@ package com.poisonh.poisonh.fragment.newsfragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +9,7 @@ import android.widget.Toast;
 
 import com.poisonh.poisonh.R;
 import com.poisonh.poisonh.WebViewActivity;
-import com.poisonh.poisonh.adapter.ListDataRVAdapter;
+import com.poisonh.poisonh.adapter.NewsListRVAdapter;
 import com.poisonh.poisonh.base.BaseFragment;
 import com.poisonh.poisonh.bean.DataList;
 import com.poisonh.poisonh.mvp.presenter.INewsHealthPresenter;
@@ -26,10 +23,10 @@ import java.util.List;
 /**
  * Created by PoisonH on 2016/4/1.
  */
-public class ListNewsFragment extends BaseFragment implements NewsHealthDataView, ListDataRVAdapter.OnItemClickLitener
+public class ListNewsFragment extends BaseFragment implements NewsHealthDataView, NewsListRVAdapter.OnItemClickLitener
 {
     private PullLoadMoreRecyclerView mRecyclerView;
-    private ListDataRVAdapter mAdapter;
+    private NewsListRVAdapter mAdapter;
     private INewsHealthPresenter mPresenter;
     private int pageIndex;
     //类别
@@ -65,7 +62,7 @@ public class ListNewsFragment extends BaseFragment implements NewsHealthDataView
         mRecyclerView.setLinearLayout();
         mRecyclerView.setFooterViewText("Loading More...");
         mRecyclerView.setOnPullLoadMoreListener(new LoadMoreListener());
-        mAdapter = new ListDataRVAdapter(getActivity());
+        mAdapter = new NewsListRVAdapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickLitener(this);
         loadData();

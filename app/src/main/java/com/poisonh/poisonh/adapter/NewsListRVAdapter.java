@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by PoisonH on 2016/2/26.
  */
-public class ListDataRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+public class NewsListRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
 
     private Context mContext;
@@ -28,7 +28,7 @@ public class ListDataRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private String mStrFileName;
     public OnItemClickLitener mOnItemClickLitener;
 
-    public ListDataRVAdapter(Context context)
+    public NewsListRVAdapter(Context context)
     {
         this.mContext = context;
         mList = new ArrayList<>();

@@ -15,7 +15,7 @@ public class VedioFragment extends BaseFragment
 {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.layout_fragment_common, null);
+        View view = inflater.inflate(R.layout.layout_fragment_listnews, null);
         return view;
     }
 }

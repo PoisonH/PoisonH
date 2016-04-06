@@ -15,13 +15,13 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/3/31.
  */
-public class ListNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+public class VideoListRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
     private Context mContext;
 
     private List<String> list = new ArrayList<>();
 
-    public ListNewsAdapter(Context context)
+    public VideoListRVAdapter(Context context)
     {
         this.mContext = context;
         list = GetData();
