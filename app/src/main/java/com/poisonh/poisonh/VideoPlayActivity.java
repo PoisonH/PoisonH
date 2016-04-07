@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.MediaPlayer;
+import io.vov.vitamio.Vitamio;
 import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
 
@@ -26,10 +26,7 @@ public class VideoPlayActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         // requestWindowFeature(Window.FEATURE_NO_TITLE);
-        if (!LibsChecker.checkVitamioLibs(this))
-        {
-            return;
-        }
+        Vitamio.isInitialized(this);
         mStrMp4Url = this.getIntent().getExtras().getString("PlayUrl");
         setContentView(R.layout.layout_activity_media);
         initView();

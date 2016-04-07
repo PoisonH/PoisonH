@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.poisonh.poisonh.PlayerActivity;
 import com.poisonh.poisonh.R;
 import com.poisonh.poisonh.adapter.VideoListRVAdapter;
 import com.poisonh.poisonh.base.BaseFragment;
@@ -129,7 +130,7 @@ public class VedioFragment extends BaseFragment implements VideoDataView, VideoL
         bundle.putString("DownLoadUrl", mVideoList.get(postion).getmStrDownloadUrl());
         bundle.putString("Duration", mVideoList.get(postion).getDuration());
         mIntent.putExtras(bundle);
-        mIntent.setClass(getActivity(), VideoPlayActivity.class);
+        mIntent.setClass(getActivity(), PlayerActivity.class);
         startActivity(mIntent);
     }
 }

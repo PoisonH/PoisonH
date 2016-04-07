@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">PoisonH</string>
     <string name="load_more_text">加载更多...</string>
+
+    <string name="save_video_shot_tips">截图已保存：</string>
+    <string name="save_video_shot_error">截图失败！</string>
+    <string name="play_error">播放失败</string>
+    <string name="play_url_error">播放地址错误</string>
 </resources>
