@@ -38,5 +38,5 @@ public class RequestURL
     public static int HAIRDRESSING = 103;
 
 
-    public static String BUDEJIE_URL = "http://s.budejie.com/topic/list/jingxuan/41/budejie-android-6.3.7/0-10.json";
+    public static String BUDEJIE_URL = "http://s.budejie.com/topic/list/jingxuan/41/budejie-android-6.3.7/";
 }

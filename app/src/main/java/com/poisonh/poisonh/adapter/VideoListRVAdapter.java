@@ -1,13 +1,18 @@
 package com.poisonh.poisonh.adapter;
 
 import android.content.Context;
+import android.net.Uri;
+import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.poisonh.poisonh.R;
+import com.poisonh.poisonh.bean.VideoDataList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +24,12 @@ public class VideoListRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 {
     private Context mContext;
 
-    private List<String> list = new ArrayList<>();
+    private List<VideoDataList> list;
 
     public VideoListRVAdapter(Context context)
     {
         this.mContext = context;
-        list = GetData();
+        list = new ArrayList<>();
     }
 
     @Override
@@ -39,7 +44,14 @@ public class VideoListRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     {
         if (holder instanceof MyViewHolder)
         {
-            ((MyViewHolder) holder).mTv.setText(list.get(position));
+            ((MyViewHolder) holder).mTvVedioTitle.setText(list.get(position).getmStrVideoTitle());
+            Uri mPicUri = Uri.parse(list.get(position).getmStrPicUrl());
+            ((MyViewHolder) holder).mSdvBackground.setImageURI(mPicUri);
+            ((MyViewHolder) holder).mTvDianZan.setText(list.get(position).getUp());
+            ((MyViewHolder) holder).mTvDiSu.setText(list.get(position).getDown());
+            ((MyViewHolder) holder).mTvZhuanFa.setText(list.get(position).getForward());
+            ((MyViewHolder) holder).mTvDuration.setText(list.get(position).getDuration());
+
         }
     }
 
@@ -51,22 +63,46 @@ public class VideoListRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public class MyViewHolder extends RecyclerView.ViewHolder
     {
-        private TextView mTv;
+        private TextView mTvVedioTitle;
+        private SimpleDraweeView mSdvBackground;
+        private ImageButton mIbPlay;
+        private ImageButton mIbDianZan;
+        private ImageButton mIbDiSu;
+        private ImageButton mIbZhuanFa;
+        private TextView mTvDianZan;
+        private TextView mTvDiSu;
+        private TextView mTvZhuanFa;
+        private TextView mTvDuration;
 
         public MyViewHolder(View itemView)
         {
             super(itemView);
-            mTv = (TextView) itemView.findViewById(R.id.tv);
+            mTvVedioTitle = (TextView) itemView.findViewById(R.id.tv_vedio_title);
+            mSdvBackground = (SimpleDraweeView) itemView.findViewById(R.id.sdv_background);
+
+            mIbPlay = (ImageButton) itemView.findViewById(R.id.ib_play);
+            mIbDianZan = (ImageButton) itemView.findViewById(R.id.ib_dianzan);
+            mIbDiSu = (ImageButton) itemView.findViewById(R.id.ib_disu);
+            mIbZhuanFa = (ImageButton) itemView.findViewById(R.id.ib_zhuanfa);
+
+            mTvDianZan = (TextView) itemView.findViewById(R.id.tv_dianzan);
+            mTvDiSu = (TextView) itemView.findViewById(R.id.tv_disu);
+            mTvZhuanFa = (TextView) itemView.findViewById(R.id.tv_zhuanfa);
+            mTvDuration = (TextView) itemView.findViewById(R.id.tv_duration);
         }
     }
 
-    private List<String> GetData()
+    public void setData(List<VideoDataList> lists)
     {
-        List<String> mList = new ArrayList<>();
-        for (int i = 0; i < 100; i++)
+        list.addAll(list.size(), lists);
+        this.notifyDataSetChanged();
+
+    }
+    public void cleanListData()
+    {
+        if (list != null || list.size() >= 0)
         {
-            mList.add("PoisonH" + i);
+            list.clear();
         }
-        return mList;
     }
 }

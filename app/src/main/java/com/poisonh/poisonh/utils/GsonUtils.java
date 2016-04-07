@@ -5,6 +5,8 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.poisonh.poisonh.bean.NewsDataList;
 import com.poisonh.poisonh.bean.NewsEntity;
+import com.poisonh.poisonh.bean.VideoDataEntity;
+import com.poisonh.poisonh.bean.VideoDataList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +85,66 @@ public class GsonUtils
             mList.add(mNewsDataList);
         }
         return mList;
+    }
+
+    public static List<VideoDataList> parseVideoJson(String str)
+    {
+        List<VideoDataList> mVideoList = new ArrayList<>();
+        VideoDataList mVideoDataList;
+
+        //视频id
+        String id;
+        //标题
+        String mStrVideoTitle;
+        //点赞次数
+        String up;
+        //低俗
+        int down;
+        //转换
+        String forward;
+        //时长
+        int duration;
+        //播放地址
+        String mStrPlayUrl;
+        //图片地址
+        String mStrPicUrl;
+        //下载地址
+        String mStrDownloadUrl;
+        //出版日期
+        String passtime;
+
+        VideoDataEntity mVideoEntity = mGson.fromJson(str, VideoDataEntity.class);
+        if (mVideoEntity.getList().size() != 0)
+        {
+            for (int i = 0; i < mVideoEntity.getList().size(); i++)
+            {
+                mVideoDataList = new VideoDataList();
+                id = mVideoEntity.getList().get(i).getId();
+                mStrVideoTitle = mVideoEntity.getList().get(i).getText();
+                up = mVideoEntity.getList().get(i).getUp();
+                down = mVideoEntity.getList().get(i).getDown();
+                forward = mVideoEntity.getList().get(i).getForward();
+                duration = mVideoEntity.getList().get(i).getVideo().getDuration();
+                mStrPlayUrl = mVideoEntity.getList().get(i).getVideo().getVideo().get(0);
+                mStrPicUrl = mVideoEntity.getList().get(i).getVideo().getThumbnail().get(0);
+                mStrDownloadUrl = mVideoEntity.getList().get(i).getVideo().getDownload().get(0);
+                passtime = mVideoEntity.getList().get(i).getPasstime();
+
+                mVideoDataList.setId(id);
+                mVideoDataList.setmStrVideoTitle(mStrVideoTitle);
+                mVideoDataList.setUp(up);
+                mVideoDataList.setDown(down + "");
+                mVideoDataList.setForward(forward);
+                mVideoDataList.setDuration(duration + "");
+                mVideoDataList.setmStrPlayUrl(mStrPlayUrl);
+                mVideoDataList.setmStrPicUrl(mStrPicUrl);
+                mVideoDataList.setmStrDownloadUrl(mStrDownloadUrl);
+                mVideoDataList.setPasstime(passtime);
+
+                mVideoList.add(mVideoDataList);
+            }
+        }
+        return mVideoList;
     }
 }
 
