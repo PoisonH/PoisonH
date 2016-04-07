@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_vedio_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="  妹子们太会玩，好羞耻的游戏集锦!"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="5dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/sdv_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+                <ImageButton
+                    android:id="@+id/ib_play"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/bofang"/>
+
+            </RelativeLayout>
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="5dp">
+
+            <ImageButton
+                android:id="@+id/ib_dianzan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/dianzan"/>
+
+            <TextView
+                android:id="@+id/tv_dianzan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/ib_dianzan"
+                android:text="999"
+                android:textColor="@color/huise"
+                android:textSize="16sp"/>
+
+            <ImageButton
+                android:id="@+id/ib_disu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@id/tv_dianzan"
+                android:background="@drawable/disu"/>
+
+            <TextView
+                android:id="@+id/tv_disu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/ib_disu"
+                android:text="100"
+                android:textColor="@color/huise"
+                android:textSize="16sp"/>
+
+            <ImageButton
+                android:id="@+id/ib_zhuanfa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@id/tv_disu"
+                android:background="@drawable/zhuanfa"/>
+
+            <TextView
+                android:id="@+id/tv_zhuanfa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/ib_zhuanfa"
+                android:text="520"
+                android:textColor="@color/huise"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/tv_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="08:41"
+                android:textSize="16sp"/>
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
