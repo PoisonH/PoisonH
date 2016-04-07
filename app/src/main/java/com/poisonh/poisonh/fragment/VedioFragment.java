@@ -1,5 +1,6 @@
 package com.poisonh.poisonh.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,16 +16,19 @@ import com.poisonh.poisonh.mvp.presenter.VideoPresenterImpl;
 import com.poisonh.poisonh.mvp.view.VideoDataView;
 import com.poisonh.poisonh.utils.ToastUtils;
 import com.poisonh.poisonh.widget.PullLoadMoreRecyclerView;
+import com.poisonh.poisonh.VideoPlayActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/3/30.
  */
-public class VedioFragment extends BaseFragment implements VideoDataView
+public class VedioFragment extends BaseFragment implements VideoDataView, VideoListRVAdapter.onWidgetClickListener
 {
     private PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     private VideoListRVAdapter mVideoListRVAdapter;
+    private List<VideoDataList> mVideoList;
     private IVideoPresenter mVideoPresenter;
     private int start = 0;
     private int end = 10;
@@ -34,6 +38,7 @@ public class VedioFragment extends BaseFragment implements VideoDataView
         View view = inflater.inflate(R.layout.layout_fragment_listnews, null);
         mVideoPresenter = new VideoPresenterImpl(this);
         mVideoListRVAdapter = new VideoListRVAdapter(getActivity());
+        mVideoList = new ArrayList<>();
         return view;
     }
 
@@ -47,6 +52,7 @@ public class VedioFragment extends BaseFragment implements VideoDataView
         mPullLoadMoreRecyclerView.setLinearLayout();
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(new LoadMoreListener());
         mPullLoadMoreRecyclerView.setAdapter(mVideoListRVAdapter);
+        mVideoListRVAdapter.setMonWidgetClickListener(this);
     }
 
 
@@ -83,6 +89,7 @@ public class VedioFragment extends BaseFragment implements VideoDataView
     @Override
     public void addListData(List<VideoDataList> lists)
     {
+        mVideoList = lists;
         mVideoListRVAdapter.setData(lists);
     }
 
@@ -91,5 +98,38 @@ public class VedioFragment extends BaseFragment implements VideoDataView
     {
         ToastUtils.showToast(getActivity(), "数据加载失败...", Toast.LENGTH_SHORT);
         mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+    }
+
+    @Override
+    public void onWidgetClick(View view, int postion)
+    {
+        switch (view.getId())
+        {
+            case R.id.ib_play:
+                switchAcitivty(postion);
+                ToastUtils.showToast(getActivity(), "你点击了播放", Toast.LENGTH_SHORT);
+                break;
+            case R.id.ib_dianzan:
+                ToastUtils.showToast(getActivity(), "你点击了点赞", Toast.LENGTH_SHORT);
+                break;
+            case R.id.ib_disu:
+                ToastUtils.showToast(getActivity(), "你点击了低俗", Toast.LENGTH_SHORT);
+                break;
+            case R.id.ib_zhuanfa:
+                ToastUtils.showToast(getActivity(), "你点击了转发", Toast.LENGTH_SHORT);
+                break;
+        }
+    }
+
+    private void switchAcitivty(int postion)
+    {
+        Intent mIntent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putString("PlayUrl", mVideoList.get(postion).getmStrPlayUrl());
+        bundle.putString("DownLoadUrl", mVideoList.get(postion).getmStrDownloadUrl());
+        bundle.putString("Duration", mVideoList.get(postion).getDuration());
+        mIntent.putExtras(bundle);
+        mIntent.setClass(getActivity(), VideoPlayActivity.class);
+        startActivity(mIntent);
     }
 }

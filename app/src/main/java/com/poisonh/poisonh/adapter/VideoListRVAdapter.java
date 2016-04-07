@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.poisonh.poisonh.R;
 import com.poisonh.poisonh.bean.VideoDataList;
+import com.poisonh.poisonh.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +25,14 @@ import java.util.List;
 public class VideoListRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
     private Context mContext;
-
     private List<VideoDataList> list;
+
+    private onWidgetClickListener monWidgetClickListener;
+
+    public void setMonWidgetClickListener(onWidgetClickListener monWidgetClickListener)
+    {
+        this.monWidgetClickListener = monWidgetClickListener;
+    }
 
     public VideoListRVAdapter(Context context)
     {
@@ -40,7 +48,7 @@ public class VideoListRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position)
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position)
     {
         if (holder instanceof MyViewHolder)
         {
@@ -52,7 +60,43 @@ public class VideoListRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             ((MyViewHolder) holder).mTvZhuanFa.setText(list.get(position).getForward());
             ((MyViewHolder) holder).mTvDuration.setText(list.get(position).getDuration());
 
+            final int pos = holder.getPosition();
+            ((MyViewHolder) holder).mIbPlay.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    monWidgetClickListener.onWidgetClick(v, pos);
+                }
+            });
+            ((MyViewHolder) holder).mIbDianZan.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    monWidgetClickListener.onWidgetClick(v, pos);
+                }
+            });
+            ((MyViewHolder) holder).mIbDiSu.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    monWidgetClickListener.onWidgetClick(v, pos);
+                }
+            });
+            ((MyViewHolder) holder).mIbZhuanFa.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    monWidgetClickListener.onWidgetClick(v, pos);
+                }
+            });
+
+
         }
+
     }
 
     @Override
@@ -98,11 +142,20 @@ public class VideoListRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.notifyDataSetChanged();
 
     }
+
     public void cleanListData()
     {
         if (list != null || list.size() >= 0)
         {
             list.clear();
         }
+    }
+
+    /**
+     * items上面控件点击事件
+     */
+    public interface onWidgetClickListener
+    {
+        void onWidgetClick(View view, int postion);
     }
 }
