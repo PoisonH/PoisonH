@@ -3,8 +3,8 @@ package com.poisonh.poisonh.utils;
 import android.content.Context;
 
 import com.google.gson.Gson;
-import com.poisonh.poisonh.bean.DataList;
-import com.poisonh.poisonh.bean.DataListEntity;
+import com.poisonh.poisonh.bean.NewsDataList;
+import com.poisonh.poisonh.bean.NewsEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +18,10 @@ public class GsonUtils
     private static Gson mGson = new Gson();
     private static Context mContext;
 
-    public static List<DataList> parseJson(String str)
+    public static List<NewsDataList> parseJson(String str)
     {
-        List<DataList> mList = new ArrayList<>();
-        DataList mDataList;
+        List<NewsDataList> mList = new ArrayList<>();
+        NewsDataList mNewsDataList;
         int id;
         String title;
         String description;
@@ -31,12 +31,12 @@ public class GsonUtils
         int click;
         String typename;
 
-        DataListEntity mEntity = mGson.fromJson(str, DataListEntity.class);
+        NewsEntity mEntity = mGson.fromJson(str, NewsEntity.class);
         if (null != mEntity.getData().getAd_data())
         {
             for (int i = 0; i < mEntity.getData().getAd_data().size(); i++)
             {
-                mDataList = new DataList();
+                mNewsDataList = new NewsDataList();
                 id = mEntity.getData().getAd_data().get(i).getId();
                 title = mEntity.getData().getAd_data().get(i).getTitle();
                 description = mEntity.getData().getAd_data().get(i).getDescription();
@@ -46,22 +46,22 @@ public class GsonUtils
                 click = mEntity.getData().getAd_data().get(i).getClick();
                 typename = mEntity.getData().getAd_data().get(i).getTypename();
 
-                mDataList.setId(id);
-                mDataList.setTitle(title);
+                mNewsDataList.setId(id);
+                mNewsDataList.setTitle(title);
                 String desc = description.replace("&#8203;", "  ");
-                mDataList.setDescription(desc);
-                mDataList.setPicurl(picurl);
-                mDataList.setList_ico(list_ico);
-                mDataList.setPubdate(pubdate);
-                mDataList.setClick(click);
-                mDataList.setTypename(typename);
+                mNewsDataList.setDescription(desc);
+                mNewsDataList.setPicurl(picurl);
+                mNewsDataList.setList_ico(list_ico);
+                mNewsDataList.setPubdate(pubdate);
+                mNewsDataList.setClick(click);
+                mNewsDataList.setTypename(typename);
 
-                mList.add(mDataList);
+                mList.add(mNewsDataList);
             }
         }
         for (int i = 0; i < mEntity.getData().getArticle_list().size(); i++)
         {
-            mDataList = new DataList();
+            mNewsDataList = new NewsDataList();
             id = mEntity.getData().getArticle_list().get(i).getId();
             title = mEntity.getData().getArticle_list().get(i).getTitle();
             description = mEntity.getData().getArticle_list().get(i).getDescription();
@@ -71,16 +71,16 @@ public class GsonUtils
             click = mEntity.getData().getArticle_list().get(i).getClick();
             typename = mEntity.getData().getArticle_list().get(i).getTypename();
 
-            mDataList.setId(id);
-            mDataList.setTitle(title);
-            mDataList.setDescription(description);
-            mDataList.setPicurl(picurl);
-            mDataList.setList_ico(list_ico);
-            mDataList.setPubdate(pubdate);
-            mDataList.setClick(click);
-            mDataList.setTypename(typename);
+            mNewsDataList.setId(id);
+            mNewsDataList.setTitle(title);
+            mNewsDataList.setDescription(description);
+            mNewsDataList.setPicurl(picurl);
+            mNewsDataList.setList_ico(list_ico);
+            mNewsDataList.setPubdate(pubdate);
+            mNewsDataList.setClick(click);
+            mNewsDataList.setTypename(typename);
 
-            mList.add(mDataList);
+            mList.add(mNewsDataList);
         }
         return mList;
     }

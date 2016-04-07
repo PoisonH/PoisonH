@@ -1,7 +1,7 @@
 package com.poisonh.poisonh.mvp.model;
 
 
-import com.poisonh.poisonh.bean.DataList;
+import com.poisonh.poisonh.bean.NewsDataList;
 import com.poisonh.poisonh.utils.GsonUtils;
 import com.poisonh.poisonh.utils.HttpUtils;
 
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by PoisonH on 2016/2/29.
  */
-public class NewsHealthListDataModelImpl implements INewsHealthListDataModel
+public class NewsModelImpl implements INewsModel
 {
 
     @Override
@@ -22,7 +22,7 @@ public class NewsHealthListDataModelImpl implements INewsHealthListDataModel
             public void onSuccess(String response)
             {
                 //这儿调用json解析工具。将string解析成list
-                List<DataList> mList = GsonUtils.parseJson(response);
+                List<NewsDataList> mList = GsonUtils.parseJson(response);
                 listener.onSuccess(mList);
             }
 
@@ -37,7 +37,7 @@ public class NewsHealthListDataModelImpl implements INewsHealthListDataModel
 
     public interface OnLoadDataListListener
     {
-        void onSuccess(List<DataList> list);
+        void onSuccess(List<NewsDataList> list);
 
         void onFailure(String msg, Exception e);
     }

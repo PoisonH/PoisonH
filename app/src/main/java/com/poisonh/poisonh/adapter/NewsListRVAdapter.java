@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.poisonh.poisonh.R;
-import com.poisonh.poisonh.bean.DataList;
+import com.poisonh.poisonh.bean.NewsDataList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class NewsListRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 {
 
     private Context mContext;
-    private List<DataList> mList;
+    private List<NewsDataList> mList;
     private String mStrFileName;
     public OnItemClickLitener mOnItemClickLitener;
 
@@ -72,8 +72,8 @@ public class NewsListRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     {
         if (holder instanceof RecyclerHolder)
         {
-            DataList mDataList = mList.get(position);
-            if (null == mDataList)
+            NewsDataList mNewsDataList = mList.get(position);
+            if (null == mNewsDataList)
             {
                 return;
             }
@@ -115,7 +115,7 @@ public class NewsListRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
 
-        View view = LayoutInflater.from(mContext).inflate(R.layout.rv_item_layout, null);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_item_news, null);
         return new RecyclerHolder(view);
     }
 
@@ -136,13 +136,13 @@ public class NewsListRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
-    public void setData(List<DataList> lists)
+    public void setData(List<NewsDataList> lists)
     {
         mList.addAll(mList.size(), lists);
         this.notifyDataSetChanged();
     }
 
-    public List<DataList> getData()
+    public List<NewsDataList> getData()
     {
         return mList;
     }

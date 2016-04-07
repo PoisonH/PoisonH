@@ -6,7 +6,7 @@ import java.util.List;
  * 视频
  * Created by PoisonH on 2016/4/6.
  */
-public class BudejieEntity
+public class VideoDataEntity
 {
     private List<ListEntity> list;
 

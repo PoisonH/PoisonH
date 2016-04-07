@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by PoisonH on 2016/2/22.
  */
-public class DataListEntity implements Serializable
+public class NewsEntity implements Serializable
 {
 
     private boolean status;

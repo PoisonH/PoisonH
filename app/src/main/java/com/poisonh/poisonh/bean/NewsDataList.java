@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by PoisonH on 2016/3/1.
  */
-public class DataList implements Serializable
+public class NewsDataList implements Serializable
 {
     private int id;
     private String title;

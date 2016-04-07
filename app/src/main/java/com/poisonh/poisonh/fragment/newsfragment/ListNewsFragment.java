@@ -11,10 +11,10 @@ import com.poisonh.poisonh.R;
 import com.poisonh.poisonh.WebViewActivity;
 import com.poisonh.poisonh.adapter.NewsListRVAdapter;
 import com.poisonh.poisonh.base.BaseFragment;
-import com.poisonh.poisonh.bean.DataList;
-import com.poisonh.poisonh.mvp.presenter.INewsHealthPresenter;
-import com.poisonh.poisonh.mvp.presenter.NewsHealthPresenterImpl;
-import com.poisonh.poisonh.mvp.view.NewsHealthDataView;
+import com.poisonh.poisonh.bean.NewsDataList;
+import com.poisonh.poisonh.mvp.presenter.INewsPresenter;
+import com.poisonh.poisonh.mvp.presenter.NewsPresenterImpl;
+import com.poisonh.poisonh.mvp.view.NewsDataView;
 import com.poisonh.poisonh.utils.ToastUtils;
 import com.poisonh.poisonh.widget.PullLoadMoreRecyclerView;
 
@@ -23,11 +23,11 @@ import java.util.List;
 /**
  * Created by PoisonH on 2016/4/1.
  */
-public class ListNewsFragment extends BaseFragment implements NewsHealthDataView, NewsListRVAdapter.OnItemClickLitener
+public class ListNewsFragment extends BaseFragment implements NewsDataView, NewsListRVAdapter.OnItemClickLitener
 {
     private PullLoadMoreRecyclerView mRecyclerView;
     private NewsListRVAdapter mAdapter;
-    private INewsHealthPresenter mPresenter;
+    private INewsPresenter mPresenter;
     private int pageIndex;
     //类别
     private int catid;
@@ -45,7 +45,7 @@ public class ListNewsFragment extends BaseFragment implements NewsHealthDataView
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        mPresenter = new NewsHealthPresenterImpl(this);
+        mPresenter = new NewsPresenterImpl(this);
         catid = getArguments().getInt("catid");
     }
 
@@ -106,7 +106,7 @@ public class ListNewsFragment extends BaseFragment implements NewsHealthDataView
     }
 
     @Override
-    public void addListData(List<DataList> lists)
+    public void addListData(List<NewsDataList> lists)
     {
         if (lists == null || lists.size() <= 0)
         {

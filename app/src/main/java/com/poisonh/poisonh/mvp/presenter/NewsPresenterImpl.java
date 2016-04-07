@@ -2,25 +2,25 @@ package com.poisonh.poisonh.mvp.presenter;
 
 
 import com.poisonh.poisonh.api.RequestURL;
-import com.poisonh.poisonh.bean.DataList;
-import com.poisonh.poisonh.mvp.model.INewsHealthListDataModel;
-import com.poisonh.poisonh.mvp.model.NewsHealthListDataModelImpl;
-import com.poisonh.poisonh.mvp.view.NewsHealthDataView;
+import com.poisonh.poisonh.bean.NewsDataList;
+import com.poisonh.poisonh.mvp.model.INewsModel;
+import com.poisonh.poisonh.mvp.model.NewsModelImpl;
+import com.poisonh.poisonh.mvp.view.NewsDataView;
 
 import java.util.List;
 
 /**
  * Created by PoisonH on 2016/2/29.
  */
-public class NewsHealthPresenterImpl implements INewsHealthPresenter, NewsHealthListDataModelImpl.OnLoadDataListListener
+public class NewsPresenterImpl implements INewsPresenter, NewsModelImpl.OnLoadDataListListener
 {
-    private NewsHealthDataView mDataView;
-    private INewsHealthListDataModel mListDataModel;
+    private NewsDataView mDataView;
+    private INewsModel mListDataModel;
 
-    public NewsHealthPresenterImpl(NewsHealthDataView dataView)
+    public NewsPresenterImpl(NewsDataView dataView)
     {
         this.mDataView = dataView;
-        this.mListDataModel = new NewsHealthListDataModelImpl();
+        this.mListDataModel = new NewsModelImpl();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class NewsHealthPresenterImpl implements INewsHealthPresenter, NewsHealth
     }
 
     @Override
-    public void onSuccess(List<DataList> list)
+    public void onSuccess(List<NewsDataList> list)
     {
         mDataView.hideProgress();
         mDataView.addListData(list);
