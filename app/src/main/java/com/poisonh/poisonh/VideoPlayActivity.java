@@ -7,12 +7,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.LinearLayoutCompat;
+import android.support.v7.widget.PopupMenu;
 import android.view.GestureDetector;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.DigitalClock;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -52,7 +58,7 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
     private SeekBar mSeekBar;
     private ImageView mVideoShot;
     private ImageView mOrientationChange;
-    private ImageView mIvVideoSetting;
+    private TextView mTvVideoSetting;
     private ImageView mIvVideoDownload;
     private View mVideoTop;
     private View mBack;
@@ -60,7 +66,8 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
     private DigitalClock mDigitalClock;
     //电池电量视图
     private BatteryView mBatteryView;
-
+    // 声明PopupWindow对象的引用
+    private PopupWindow popupWindow;
     // 手势
     private GestureDetector mDetector;
     private PlayerGesture mPlayerGesture;
@@ -172,7 +179,7 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
         mSeekBar = (SeekBar) findViewById(R.id.player_seekbar);
         mVideoShot = (ImageView) findViewById(R.id.video_shot);
         mOrientationChange = (ImageView) findViewById(R.id.orientation_change);
-        mIvVideoSetting = (ImageView) findViewById(R.id.video_setting);
+        mTvVideoSetting = (TextView) findViewById(R.id.video_setting);
         mIvVideoDownload = (ImageView) findViewById(R.id.video_download);
         mVideoTop = findViewById(R.id.player_top_bar);
         mBack = findViewById(R.id.player_back);
@@ -299,7 +306,7 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
         mVideoPlayPause.setOnClickListener(this);
         mVideoShot.setOnClickListener(this);
         mOrientationChange.setOnClickListener(this);
-        mIvVideoSetting.setOnClickListener(this);
+        mTvVideoSetting.setOnClickListener(this);
         mBack.setOnClickListener(this);
         mVideoShot.setEnabled(false);
         mIvVideoDownload.setOnClickListener(this);
@@ -521,13 +528,68 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
                 finish();
                 break;
             case R.id.video_setting:
-                //设置
+                ToastUtils.showToast(getApplicationContext(), "你点击了清晰度", Toast.LENGTH_SHORT);
+                //设置清晰度
+                settingDefinition();
                 break;
             case R.id.video_download:
                 //下载
                 break;
             default:
                 break;
+        }
+    }
+
+    /**
+     * 设置清晰度
+     */
+    private void settingDefinition()
+    {
+        getPopupWindow();
+        popupWindow.showAtLocation(mTvVideoSetting, Gravity.TOP, 0, 10);
+    }
+
+    /**
+     * 创建PopupWindow
+     */
+    protected void initPopuptWindow()
+    {
+        // TODO Auto-generated method stub
+        // 获取自定义布局文件activity_popupwindow_left.xml的视图
+        View popupWindow_view = getLayoutInflater().inflate(R.layout.layout_dialog_video_setting, null, false);
+        // 创建PopupWindow实例,200,LayoutParams.MATCH_PARENT分别是宽度和高度
+        popupWindow = new PopupWindow(popupWindow_view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT, true);
+        // 设置动画效果
+        //  popupWindow.setAnimationStyle(R.style.AnimationFade);
+        // 点击其他地方消失
+        popupWindow_view.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                // TODO Auto-generated method stub
+                if (popupWindow != null && popupWindow.isShowing())
+                {
+                    popupWindow.dismiss();
+                    popupWindow = null;
+                }
+                return false;
+            }
+        });
+    }
+
+    /***
+     * 获取PopupWindow实例
+     */
+    private void getPopupWindow()
+    {
+        if (null != popupWindow)
+        {
+            popupWindow.dismiss();
+            return;
+        } else
+        {
+            initPopuptWindow();
         }
     }
 
