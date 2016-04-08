@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/player_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -14,7 +15,7 @@
             android:id="@+id/vitamio_videoview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"/>
 
     </io.vov.vitamio.widget.CenterLayout>
 
@@ -35,7 +36,7 @@
             android:layout_height="36dp"
             android:layout_gravity="center"
             android:indeterminateBehavior="repeat"
-            android:indeterminateDrawable="@drawable/loading_icon_animated_rotate" />
+            android:indeterminateDrawable="@drawable/loading_icon_animated_rotate"/>
 
         <TextView
             android:id="@+id/loading_text"
@@ -45,7 +46,7 @@
             android:gravity="center"
             android:hint="数据加载中..."
             android:textColor="@color/white"
-            android:textSize="13sp" />
+            android:textSize="13sp"/>
     </LinearLayout>
 
     <ImageView
@@ -54,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:src="@drawable/control_bofang"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
 
     <RelativeLayout
@@ -72,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/control_bofang" />
+            android:src="@drawable/control_bofang"/>
 
         <TextView
             android:id="@+id/player_current_time"
@@ -83,16 +84,16 @@
             android:layout_toRightOf="@id/player_play_iv"
             android:textColor="@color/white"
             android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <ImageView
             android:id="@+id/orientation_change"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_toLeftOf="@+id/video_setting"
+            android:layout_marginRight="15dp"
             android:layout_centerVertical="true"
-            android:src="@drawable/web_refresh_icon" />
-
+            android:src="@drawable/qiehuan"/>
         <ImageView
             android:id="@+id/video_shot"
             android:layout_width="wrap_content"
@@ -100,7 +101,22 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@id/orientation_change"
-            android:src="@drawable/video_shot_icon" />
+            android:src="@drawable/video_shot_icon"/>
+        <ImageView
+            android:id="@+id/video_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/video_download"
+            android:src="@drawable/setting"/>
+        <ImageView
+            android:id="@+id/video_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/xiazai"/>
 
         <TextView
             android:id="@+id/player_total_time"
@@ -111,7 +127,7 @@
             android:layout_toLeftOf="@id/video_shot"
             android:textColor="@color/white"
             android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <SeekBar
             android:id="@+id/player_seekbar"
@@ -141,7 +157,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:padding="5dp"
-            android:src="@drawable/ic_reply_black_24dp" />
+            android:src="@drawable/ic_reply_black_24dp"/>
 
         <TextView
             android:id="@+id/player_name"
@@ -151,15 +167,15 @@
             android:maxLines="1"
             android:textColor="@color/white"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <DigitalClock
                 android:id="@+id/clock"
@@ -168,13 +184,13 @@
                 android:layout_marginRight="15dp"
                 android:textColor="@color/white"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <com.poisonh.poisonh.widget.BatteryView
                 android:id="@+id/battery_view"
                 android:layout_width="30dp"
                 android:layout_height="15dp"
-                android:layout_marginRight="15dp" />
+                android:layout_marginRight="15dp"/>
         </LinearLayout>
 
     </RelativeLayout>
@@ -182,6 +198,6 @@
     <FrameLayout
         android:id="@+id/front_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>

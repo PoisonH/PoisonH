@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.poisonh.poisonh.PlayerActivity;
+import com.poisonh.poisonh.VideoPlayActivity;
 import com.poisonh.poisonh.R;
 import com.poisonh.poisonh.adapter.VideoListRVAdapter;
 import com.poisonh.poisonh.base.BaseFragment;
@@ -17,7 +17,6 @@ import com.poisonh.poisonh.mvp.presenter.VideoPresenterImpl;
 import com.poisonh.poisonh.mvp.view.VideoDataView;
 import com.poisonh.poisonh.utils.ToastUtils;
 import com.poisonh.poisonh.widget.PullLoadMoreRecyclerView;
-import com.poisonh.poisonh.VideoPlayActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +53,7 @@ public class VedioFragment extends BaseFragment implements VideoDataView, VideoL
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(new LoadMoreListener());
         mPullLoadMoreRecyclerView.setAdapter(mVideoListRVAdapter);
         mVideoListRVAdapter.setMonWidgetClickListener(this);
+        mVideoPresenter.loadDataList(start, end);
     }
 
 
@@ -62,13 +62,14 @@ public class VedioFragment extends BaseFragment implements VideoDataView, VideoL
         @Override
         public void onRefresh()
         {
+            end = 10;
             mVideoPresenter.loadDataList(start, end);
         }
 
         @Override
         public void onLoadMore()
         {
-            mVideoPresenter.loadDataList(end, end += 10);
+            mVideoPresenter.loadDataList(start, end += 10);
         }
     }
 
@@ -91,6 +92,10 @@ public class VedioFragment extends BaseFragment implements VideoDataView, VideoL
     public void addListData(List<VideoDataList> lists)
     {
         mVideoList = lists;
+        if (mVideoListRVAdapter.getData())
+        {
+            mVideoListRVAdapter.cleanListData();
+        }
         mVideoListRVAdapter.setData(lists);
     }
 
@@ -130,7 +135,7 @@ public class VedioFragment extends BaseFragment implements VideoDataView, VideoL
         bundle.putString("DownLoadUrl", mVideoList.get(postion).getmStrDownloadUrl());
         bundle.putString("Duration", mVideoList.get(postion).getDuration());
         mIntent.putExtras(bundle);
-        mIntent.setClass(getActivity(), PlayerActivity.class);
+        mIntent.setClass(getActivity(), VideoPlayActivity.class);
         startActivity(mIntent);
     }
 }
