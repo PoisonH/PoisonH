@@ -46,17 +46,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PlayerActivity"
+            android:name=".VideoPlayActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity android:name=".WebViewActivity"/>
-        <activity
-            android:name=".VideoPlayActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name="io.vov.vitamio.activity.InitActivity"
             android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"

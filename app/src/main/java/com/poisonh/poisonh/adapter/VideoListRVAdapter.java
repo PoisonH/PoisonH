@@ -143,6 +143,18 @@ public class VideoListRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     }
 
+    public boolean getData()
+    {
+        if (list.size() != 0)
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
+
+    }
+
     public void cleanListData()
     {
         if (list != null || list.size() >= 0)
