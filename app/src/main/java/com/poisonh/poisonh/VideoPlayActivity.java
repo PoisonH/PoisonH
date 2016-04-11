@@ -3,22 +3,18 @@ package com.poisonh.poisonh;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.media.AudioFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.support.v7.widget.PopupMenu;
+import android.util.Log;
 import android.view.GestureDetector;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.DigitalClock;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -40,7 +36,7 @@ import io.vov.vitamio.widget.VideoView;
 /**
  * 播放页 TODO 使用mediacontroller(需要改动)  下载视频到本地(文件下载)
  */
-public class VideoPlayActivity extends Activity implements View.OnClickListener
+public class VideoPlayActivity extends Activity implements View.OnClickListener, VideoSettingDialog.VideoSettingListener
 {
 
     private final int HIDE_INTERVAL = 5000;// 隐藏控制View时间间隔
@@ -66,14 +62,11 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
     private DigitalClock mDigitalClock;
     //电池电量视图
     private BatteryView mBatteryView;
-    // 声明PopupWindow对象的引用
-    private PopupWindow popupWindow;
     // 手势
     private GestureDetector mDetector;
     private PlayerGesture mPlayerGesture;
     private String mStrPlayUrl;
     private String name;// 视频名称
-    private Uri playUri;// 播放地址
     private boolean isPlayComplete = false;// 是否播放完成
     private boolean isPlayError = false;// 是否播放出错
     private long currentPosition = 0;// 播放位置
@@ -81,6 +74,7 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
 
     private final int SAVE_BITMAP = 1;// 保存截图
 
+    private VideoSettingDialog.VideoSettingListener mVideoSettingListener;
     private Handler mHandler = new Handler(new Handler.Callback()
     {
         @Override
@@ -113,7 +107,7 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
         mStrPlayUrl = this.getIntent().getExtras().getString("PlayUrl");
-
+        Log.i("VideoPlayActivity", mStrPlayUrl);
         mFindViewById();
         initVideoView();
         initPlayerUrl();
@@ -348,12 +342,12 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
         });
 
 
-        if (playUri == null)
+        if (mStrPlayUrl == null)
         {
             ToastUtils.showToast(getApplicationContext(), R.string.play_url_error + "", Toast.LENGTH_SHORT);
         } else
         {
-            mVideoView.setVideoURI(playUri);
+            mVideoView.setVideoPath(mStrPlayUrl);
             mLoadingView.setVisibility(View.VISIBLE);
         }
 
@@ -364,7 +358,6 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
      */
     private Runnable hiddenViewThread = new Runnable()
     {
-
         @Override
         public void run()
         {
@@ -469,7 +462,7 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
         if (isPlayComplete)
         {
             currentPosition = 0;
-            mVideoView.setVideoURI(playUri);
+            mVideoView.setVideoPath(mStrPlayUrl);
             isPlayComplete = false;
         } else
         {
@@ -545,51 +538,31 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
      */
     private void settingDefinition()
     {
-        getPopupWindow();
-        popupWindow.showAtLocation(mTvVideoSetting, Gravity.TOP, 0, 10);
+        VideoSettingDialog mDialog = new VideoSettingDialog();
+        //注册清晰度监听
+        mDialog.setmVideoSettingListener(this);
+        mDialog.show(getFragmentManager(), "Title");
     }
 
-    /**
-     * 创建PopupWindow
-     */
-    protected void initPopuptWindow()
-    {
-        // TODO Auto-generated method stub
-        // 获取自定义布局文件activity_popupwindow_left.xml的视图
-        View popupWindow_view = getLayoutInflater().inflate(R.layout.layout_dialog_video_setting, null, false);
-        // 创建PopupWindow实例,200,LayoutParams.MATCH_PARENT分别是宽度和高度
-        popupWindow = new PopupWindow(popupWindow_view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT, true);
-        // 设置动画效果
-        //  popupWindow.setAnimationStyle(R.style.AnimationFade);
-        // 点击其他地方消失
-        popupWindow_view.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View v, MotionEvent event)
-            {
-                // TODO Auto-generated method stub
-                if (popupWindow != null && popupWindow.isShowing())
-                {
-                    popupWindow.dismiss();
-                    popupWindow = null;
-                }
-                return false;
-            }
-        });
-    }
 
-    /***
-     * 获取PopupWindow实例
-     */
-    private void getPopupWindow()
+    @Override
+    public void chooseClarity(int type)
     {
-        if (null != popupWindow)
+        switch (type)
         {
-            popupWindow.dismiss();
-            return;
-        } else
-        {
-            initPopuptWindow();
+            case 1:
+                ToastUtils.showToast(getApplicationContext(), "你选择了标准", Toast.LENGTH_SHORT);
+                break;
+            case 2:
+                String mStrClear = mStrPlayUrl.replace("bvideo", "wvideo");
+                ToastUtils.showToast(getApplicationContext(), "你选择了流畅", Toast.LENGTH_SHORT);
+                Log.i("VideoPlayActivity", mStrClear);
+                break;
+            case 3:
+                String mStrHD = mStrPlayUrl.replace("bvideo", "dvideo");
+                ToastUtils.showToast(getApplicationContext(), "你选择了高清", Toast.LENGTH_SHORT);
+                Log.i("VideoPlayActivity", mStrHD);
+                break;
         }
     }
 
@@ -637,7 +610,6 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
                 lastX = event.getX(0) - event.getX(1);
                 lastY = event.getY(0) - event.getY(1);
                 lastDistance = Math.sqrt(lastX * lastX + lastY * lastY);
-
             } else if ((action & MotionEvent.ACTION_MASK) == MotionEvent.ACTION_POINTER_UP)
             {
                 // 抬手，重置
@@ -650,12 +622,10 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
                 lastX = event.getX(0) - event.getX(1);
                 lastY = event.getY(0) - event.getY(1);
                 double moveDistance = Math.sqrt(lastX * lastX + lastY * lastY);
-
                 int difference = (int) (moveDistance - lastDistance);
                 float changeScale = difference / 100f;
                 mVideoView.scaleVideo(changeScale);
                 lastDistance = moveDistance;
-
             }
 
             return super.onTouchEvent(event);
