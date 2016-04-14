@@ -30,6 +30,7 @@ public class WebViewActivity extends AppCompatActivity
             public boolean shouldOverrideUrlLoading(WebView view, String url)
             {
                 view.loadUrl(url);
+
                 return true;
             }
         });

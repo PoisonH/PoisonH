@@ -3,8 +3,6 @@ package com.poisonh.poisonh;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.media.AudioFormat;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -36,7 +34,7 @@ import io.vov.vitamio.widget.VideoView;
 /**
  * 播放页 TODO 使用mediacontroller(需要改动)  下载视频到本地(文件下载)
  */
-public class VideoPlayActivity extends Activity implements View.OnClickListener, VideoSettingDialog.VideoSettingListener
+public class VideoPlayActivity extends Activity implements View.OnClickListener
 {
 
     private final int HIDE_INTERVAL = 5000;// 隐藏控制View时间间隔
@@ -54,7 +52,6 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener,
     private SeekBar mSeekBar;
     private ImageView mVideoShot;
     private ImageView mOrientationChange;
-    private TextView mTvVideoSetting;
     private ImageView mIvVideoDownload;
     private View mVideoTop;
     private View mBack;
@@ -74,7 +71,6 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener,
 
     private final int SAVE_BITMAP = 1;// 保存截图
 
-    private VideoSettingDialog.VideoSettingListener mVideoSettingListener;
     private Handler mHandler = new Handler(new Handler.Callback()
     {
         @Override
@@ -173,7 +169,6 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener,
         mSeekBar = (SeekBar) findViewById(R.id.player_seekbar);
         mVideoShot = (ImageView) findViewById(R.id.video_shot);
         mOrientationChange = (ImageView) findViewById(R.id.orientation_change);
-        mTvVideoSetting = (TextView) findViewById(R.id.video_setting);
         mIvVideoDownload = (ImageView) findViewById(R.id.video_download);
         mVideoTop = findViewById(R.id.player_top_bar);
         mBack = findViewById(R.id.player_back);
@@ -300,7 +295,6 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener,
         mVideoPlayPause.setOnClickListener(this);
         mVideoShot.setOnClickListener(this);
         mOrientationChange.setOnClickListener(this);
-        mTvVideoSetting.setOnClickListener(this);
         mBack.setOnClickListener(this);
         mVideoShot.setEnabled(false);
         mIvVideoDownload.setOnClickListener(this);
@@ -520,48 +514,10 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener,
             case R.id.player_back:
                 finish();
                 break;
-            case R.id.video_setting:
-                ToastUtils.showToast(getApplicationContext(), "你点击了清晰度", Toast.LENGTH_SHORT);
-                //设置清晰度
-                settingDefinition();
-                break;
             case R.id.video_download:
                 //下载
                 break;
             default:
-                break;
-        }
-    }
-
-    /**
-     * 设置清晰度
-     */
-    private void settingDefinition()
-    {
-        VideoSettingDialog mDialog = new VideoSettingDialog();
-        //注册清晰度监听
-        mDialog.setmVideoSettingListener(this);
-        mDialog.show(getFragmentManager(), "Title");
-    }
-
-
-    @Override
-    public void chooseClarity(int type)
-    {
-        switch (type)
-        {
-            case 1:
-                ToastUtils.showToast(getApplicationContext(), "你选择了标准", Toast.LENGTH_SHORT);
-                break;
-            case 2:
-                String mStrClear = mStrPlayUrl.replace("bvideo", "wvideo");
-                ToastUtils.showToast(getApplicationContext(), "你选择了流畅", Toast.LENGTH_SHORT);
-                Log.i("VideoPlayActivity", mStrClear);
-                break;
-            case 3:
-                String mStrHD = mStrPlayUrl.replace("bvideo", "dvideo");
-                ToastUtils.showToast(getApplicationContext(), "你选择了高清", Toast.LENGTH_SHORT);
-                Log.i("VideoPlayActivity", mStrHD);
                 break;
         }
     }

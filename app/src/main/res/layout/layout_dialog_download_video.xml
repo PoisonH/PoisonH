@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        app:layout_heightPercent="60%"
+        app:layout_widthPercent="90%">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ff6d00">
+
+            <RadioGroup
+                android:id="@+id/rg_toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="5dp"
+                android:background="@drawable/shape_radiogroup_bg"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_downloading"
+                    style="@style/radiobutton_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_radiobutton_bg_left"
+                    android:checked="true"
+                    android:text="@string/str_downloading"
+                    android:textColor="@drawable/radiobutton_text_selector"/>
+
+                <RadioButton
+                    android:id="@+id/rb_downloaded"
+                    style="@style/radiobutton_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_radiobutton_bg_right"
+                    android:text="@string/str_downloaded"
+                    android:textColor="@drawable/radiobutton_text_selector"/>
+            </RadioGroup>
+        </RelativeLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_download_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+</android.support.percent.PercentRelativeLayout>

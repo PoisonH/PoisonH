@@ -2,6 +2,7 @@ package com.poisonh.poisonh.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +25,11 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/3/30.
  */
-public class VedioFragment extends BaseFragment implements VideoDataView, VideoListRVAdapter.onWidgetClickListener
+public class VedioFragment extends BaseFragment implements VideoDataView, VideoListRVAdapter.onWidgetClickListener, View.OnClickListener
 {
     private PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     private VideoListRVAdapter mVideoListRVAdapter;
+    private FloatingActionButton mFabBtn;
     private List<VideoDataList> mVideoList;
     private IVideoPresenter mVideoPresenter;
     private int start = 0;
@@ -35,7 +37,7 @@ public class VedioFragment extends BaseFragment implements VideoDataView, VideoL
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.layout_fragment_listnews, null);
+        View view = inflater.inflate(R.layout.layout_fragment_listvideo, null);
         mVideoPresenter = new VideoPresenterImpl(this);
         mVideoListRVAdapter = new VideoListRVAdapter(getActivity());
         mVideoList = new ArrayList<>();
@@ -47,12 +49,14 @@ public class VedioFragment extends BaseFragment implements VideoDataView, VideoL
     {
         super.onViewCreated(view, savedInstanceState);
         mPullLoadMoreRecyclerView = (PullLoadMoreRecyclerView) view.findViewById(R.id.rv_view);
+        mFabBtn = (FloatingActionButton) view.findViewById(R.id.fab_btn);
         //设置上拉刷新文字
         mPullLoadMoreRecyclerView.setFooterViewText("Loading Data...");
         mPullLoadMoreRecyclerView.setLinearLayout();
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(new LoadMoreListener());
         mPullLoadMoreRecyclerView.setAdapter(mVideoListRVAdapter);
         mVideoListRVAdapter.setMonWidgetClickListener(this);
+        mFabBtn.setOnClickListener(this);
         mVideoPresenter.loadDataList(start, end);
     }
 
@@ -137,5 +141,17 @@ public class VedioFragment extends BaseFragment implements VideoDataView, VideoL
         mIntent.putExtras(bundle);
         mIntent.setClass(getActivity(), VideoPlayActivity.class);
         startActivity(mIntent);
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
+            case R.id.fab_btn:
+                VideoDownloadDialog mDownloadDialog = new VideoDownloadDialog();
+                mDownloadDialog.show(getFragmentManager(), "A");
+                break;
+        }
     }
 }

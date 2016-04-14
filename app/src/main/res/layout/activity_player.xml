@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
-            android:layout_toLeftOf="@+id/video_setting"
+            android:layout_toLeftOf="@+id/video_download"
             android:src="@drawable/qiehuan"/>
 
         <ImageView
@@ -103,16 +103,6 @@
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@id/orientation_change"
             android:src="@drawable/video_shot_icon"/>
-
-        <TextView
-            android:id="@+id/video_setting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
-            android:layout_toLeftOf="@+id/video_download"
-            android:text="标清"
-            android:textSize="16sp"/>
 
         <ImageView
             android:id="@+id/video_download"
