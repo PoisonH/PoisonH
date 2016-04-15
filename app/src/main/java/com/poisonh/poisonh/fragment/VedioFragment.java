@@ -16,6 +16,7 @@ import com.poisonh.poisonh.bean.VideoDataList;
 import com.poisonh.poisonh.mvp.presenter.IVideoPresenter;
 import com.poisonh.poisonh.mvp.presenter.VideoPresenterImpl;
 import com.poisonh.poisonh.mvp.view.VideoDataView;
+import com.poisonh.poisonh.utils.AppConstant;
 import com.poisonh.poisonh.utils.ToastUtils;
 import com.poisonh.poisonh.widget.PullLoadMoreRecyclerView;
 
@@ -135,9 +136,9 @@ public class VedioFragment extends BaseFragment implements VideoDataView, VideoL
     {
         Intent mIntent = new Intent();
         Bundle bundle = new Bundle();
-        bundle.putString("PlayUrl", mVideoList.get(postion).getmStrPlayUrl());
-        bundle.putString("DownLoadUrl", mVideoList.get(postion).getmStrDownloadUrl());
-        bundle.putString("Duration", mVideoList.get(postion).getDuration());
+        bundle.putString(AppConstant.VIDEO_PLAYURL, mVideoList.get(postion).getmStrPlayUrl());
+        bundle.putString(AppConstant.VIDEO_DURATION, mVideoList.get(postion).getDuration());
+        bundle.putString(AppConstant.VIDEO_NAME, mVideoList.get(postion).getmStrVideoTitle());
         mIntent.putExtras(bundle);
         mIntent.setClass(getActivity(), VideoPlayActivity.class);
         startActivity(mIntent);

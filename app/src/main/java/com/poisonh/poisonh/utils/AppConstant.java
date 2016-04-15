@@ -5,7 +5,7 @@ package com.poisonh.poisonh.utils;
  */
 public class AppConstant
 {
-    public static int VIDEO_CLARITY_STANDARD = 1;
-    public static int VIDEO_CLARITY_CLEAR = 2;
-    public static int VIDEO_CLARITY_HD= 3;
+    public static String VIDEO_NAME;
+    public static String VIDEO_PLAYURL;
+    public static String VIDEO_DURATION;
 }

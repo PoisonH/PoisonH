@@ -18,6 +18,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.poisonh.poisonh.utils.AppConstant;
 import com.poisonh.poisonh.utils.FileManager;
 import com.poisonh.poisonh.utils.PlayerGesture;
 import com.poisonh.poisonh.utils.ToastUtils;
@@ -63,6 +64,7 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
     private GestureDetector mDetector;
     private PlayerGesture mPlayerGesture;
     private String mStrPlayUrl;
+    private String mStrVideoName;
     private String name;// 视频名称
     private boolean isPlayComplete = false;// 是否播放完成
     private boolean isPlayError = false;// 是否播放出错
@@ -70,6 +72,13 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
     private int currentVideoLayout = VideoView.VIDEO_LAYOUT_SCALE;
 
     private final int SAVE_BITMAP = 1;// 保存截图
+
+    private onVideoDownloadListener monVideoDownloadListener;
+
+    public void setOnVideoDownloadListener(onVideoDownloadListener monVideoDownloadListener)
+    {
+        this.monVideoDownloadListener = monVideoDownloadListener;
+    }
 
     private Handler mHandler = new Handler(new Handler.Callback()
     {
@@ -102,7 +111,8 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
-        mStrPlayUrl = this.getIntent().getExtras().getString("PlayUrl");
+        mStrPlayUrl = this.getIntent().getExtras().getString(AppConstant.VIDEO_PLAYURL);
+        mStrVideoName = this.getIntent().getExtras().getString(AppConstant.VIDEO_NAME);
         Log.i("VideoPlayActivity", mStrPlayUrl);
         mFindViewById();
         initVideoView();
@@ -516,6 +526,7 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
                 break;
             case R.id.video_download:
                 //下载
+                monVideoDownloadListener.downloadVideo(mStrVideoName, mStrPlayUrl);
                 break;
             default:
                 break;
@@ -625,5 +636,11 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
         // 每次切换屏幕方向完成，需要重新计算VideoView宽高，故重新设置VideoLayout
         mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, 0);
         mPlayerGesture.setScreenWidth(this);
+    }
+
+
+    public interface onVideoDownloadListener
+    {
+        void downloadVideo(String videoname, String downloadurl);
     }
 }

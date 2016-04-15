@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+
+    <CheckBox
+        android:id="@+id/cb_checked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp"/>
+
+    <TextView
+        android:id="@+id/tv_download_filename"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/ib_start_or_pause"
+        android:layout_toRightOf="@+id/cb_checked"
+        android:text="我是百思不得姐"
+        android:textSize="12dp"/>
+
+    <ProgressBar
+        android:id="@+id/pb_bar"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/ib_start_or_pause"
+        android:layout_toRightOf="@+id/cb_checked"
+        android:background="@color/huise"/>
+
+
+    <ImageButton
+        android:id="@+id/ib_start_or_pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="10dp"
+        android:layout_toLeftOf="@+id/ib_delete"
+        android:background="@drawable/download_start"/>
+
+    <ImageButton
+        android:id="@+id/ib_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/download_delete"/>
+</RelativeLayout>

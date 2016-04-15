@@ -1,9 +1,9 @@
 package com.poisonh.poisonh.fragment.downloadfragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +12,22 @@ import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.poisonh.poisonh.R;
+import com.poisonh.poisonh.VideoPlayActivity;
 
 /**
  * Created by PoisonH on 2016/4/14.
  */
-public class DownloadingFragment extends Fragment
+public class DownloadingFragment extends Fragment implements VideoPlayActivity.onVideoDownloadListener
 {
 
     private RecyclerView mRvDownloading;
+    private VideoPlayActivity mVideoPlayActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        mVideoPlayActivity = new VideoPlayActivity();
+        mVideoPlayActivity.setOnVideoDownloadListener(this);
         return inflater.inflate(R.layout.layout_fragment_downloading, null);
     }
 
@@ -85,5 +89,11 @@ public class DownloadingFragment extends Fragment
 
             }
         });
+    }
+
+    @Override
+    public void downloadVideo(String videoname, String downloadurl)
+    {
+        Log.i("DownloadingFragment", "videoname:" + videoname + " ==  " + "downloadurl:" + downloadurl);
     }
 }
