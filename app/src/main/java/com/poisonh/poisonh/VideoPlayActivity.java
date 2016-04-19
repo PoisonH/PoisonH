@@ -19,6 +19,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.poisonh.poisonh.fragment.VedioFragment;
+import com.poisonh.poisonh.fragment.downloadfragment.DownloadingFragment;
 import com.poisonh.poisonh.utils.AppConstant;
 import com.poisonh.poisonh.utils.FileManager;
 import com.poisonh.poisonh.utils.PlayerGesture;

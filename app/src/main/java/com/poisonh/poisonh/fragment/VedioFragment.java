@@ -13,6 +13,7 @@ import com.poisonh.poisonh.R;
 import com.poisonh.poisonh.adapter.VideoListRVAdapter;
 import com.poisonh.poisonh.base.BaseFragment;
 import com.poisonh.poisonh.bean.VideoDataList;
+import com.poisonh.poisonh.fragment.downloadfragment.DownloadingFragment;
 import com.poisonh.poisonh.mvp.presenter.IVideoPresenter;
 import com.poisonh.poisonh.mvp.presenter.VideoPresenterImpl;
 import com.poisonh.poisonh.mvp.view.VideoDataView;
@@ -141,6 +142,8 @@ public class VedioFragment extends BaseFragment implements VideoDataView, VideoL
         bundle.putString(AppConstant.VIDEO_NAME, mVideoList.get(postion).getmStrVideoTitle());
         mIntent.putExtras(bundle);
         mIntent.setClass(getActivity(), VideoPlayActivity.class);
+        DownloadingFragment fragment = new DownloadingFragment();
+        fragment.registerBroadcase();
         startActivity(mIntent);
     }
 

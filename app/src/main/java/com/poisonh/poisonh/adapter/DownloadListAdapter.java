@@ -39,7 +39,7 @@ public class DownloadListAdapter extends RecyclerView.Adapter<DownloadListAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position)
     {
-
+        holder.mTvDownloadFileName.setText(mList.get(position).getFileName());
     }
 
     @Override
