@@ -10,4 +10,5 @@
     <string name="cancel">取消</string>
     <string name="str_downloading">下载</string>
     <string name="str_downloaded">完成</string>
+    <string name="joined_download_queue">已加入下载队列</string>
 </resources>

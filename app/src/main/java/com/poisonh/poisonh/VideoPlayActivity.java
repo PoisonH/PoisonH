@@ -1,6 +1,7 @@
 package com.poisonh.poisonh;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -72,14 +73,6 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
     private int currentVideoLayout = VideoView.VIDEO_LAYOUT_SCALE;
 
     private final int SAVE_BITMAP = 1;// 保存截图
-
-    private onVideoDownloadListener monVideoDownloadListener;
-
-    public void setOnVideoDownloadListener(onVideoDownloadListener monVideoDownloadListener)
-    {
-        this.monVideoDownloadListener = monVideoDownloadListener;
-    }
-
     private Handler mHandler = new Handler(new Handler.Callback()
     {
         @Override
@@ -526,12 +519,31 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
                 break;
             case R.id.video_download:
                 //下载
-                monVideoDownloadListener.downloadVideo(mStrVideoName, mStrPlayUrl);
+                ToastUtils.showToast(this, getString(R.string.joined_download_queue), Toast.LENGTH_SHORT);
+                sendDownloadOrder(mStrVideoName, mStrPlayUrl);
                 break;
             default:
                 break;
         }
     }
+
+    /**
+     * 下载视频
+     *
+     * @param mStrVideoName 视频名字
+     * @param mStrPlayUrl   下载地址
+     */
+    private void sendDownloadOrder(String mStrVideoName, String mStrPlayUrl)
+    {
+        Intent intent = new Intent();
+        intent.setAction(AppConstant.VIDEO_DOWNDLOAD_BROADCAST);
+        Bundle mBundle = new Bundle();
+        mBundle.putString("VideoName", mStrVideoName);
+        mBundle.putString("PlayUrl", mStrPlayUrl);
+        intent.putExtras(mBundle);
+        sendBroadcast(intent);
+    }
+
 
     /**
      * 存视频截图
@@ -636,11 +648,5 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
         // 每次切换屏幕方向完成，需要重新计算VideoView宽高，故重新设置VideoLayout
         mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, 0);
         mPlayerGesture.setScreenWidth(this);
-    }
-
-
-    public interface onVideoDownloadListener
-    {
-        void downloadVideo(String videoname, String downloadurl);
     }
 }

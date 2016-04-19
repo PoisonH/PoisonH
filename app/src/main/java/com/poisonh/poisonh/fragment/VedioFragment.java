@@ -49,6 +49,7 @@ public class VedioFragment extends BaseFragment implements VideoDataView, VideoL
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
+
         mPullLoadMoreRecyclerView = (PullLoadMoreRecyclerView) view.findViewById(R.id.rv_view);
         mFabBtn = (FloatingActionButton) view.findViewById(R.id.fab_btn);
         //设置上拉刷新文字
@@ -137,7 +138,6 @@ public class VedioFragment extends BaseFragment implements VideoDataView, VideoL
         Intent mIntent = new Intent();
         Bundle bundle = new Bundle();
         bundle.putString(AppConstant.VIDEO_PLAYURL, mVideoList.get(postion).getmStrPlayUrl());
-        bundle.putString(AppConstant.VIDEO_DURATION, mVideoList.get(postion).getDuration());
         bundle.putString(AppConstant.VIDEO_NAME, mVideoList.get(postion).getmStrVideoTitle());
         mIntent.putExtras(bundle);
         mIntent.setClass(getActivity(), VideoPlayActivity.class);
@@ -155,4 +155,5 @@ public class VedioFragment extends BaseFragment implements VideoDataView, VideoL
                 break;
         }
     }
+
 }
