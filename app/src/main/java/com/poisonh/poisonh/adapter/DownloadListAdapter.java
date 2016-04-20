@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +12,11 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.poisonh.poisonh.R;
 import com.poisonh.poisonh.bean.DownloadTaskInfo;
+import com.poisonh.poisonh.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,8 @@ public class DownloadListAdapter extends RecyclerView.Adapter<DownloadListAdapte
     private Context mContext;
     private List<DownloadTaskInfo> mList;
     private static int UPDATE_BAR = 0;
+    private View view;
+    private MyViewHolder myViewHolder;
 
     public DownloadListAdapter(Context context)
     {
@@ -43,13 +48,16 @@ public class DownloadListAdapter extends RecyclerView.Adapter<DownloadListAdapte
     public void onBindViewHolder(MyViewHolder holder, int position)
     {
         holder.mTvDownloadFileName.setText(mList.get(position).getFileName());
-        holder.mPbBar.setProgress(mList.get(position).getDownFileSize());
+        float a = mList.get(position).getDownFileSize();
+        float b = mList.get(position).getFileSize();
+        int c = (int) (a / b * 100);
+        holder.mPbBar.setProgress(c);
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_item_download, null);
+        view = LayoutInflater.from(mContext).inflate(R.layout.layout_item_download, null);
         return new MyViewHolder(view);
     }
 
@@ -57,9 +65,9 @@ public class DownloadListAdapter extends RecyclerView.Adapter<DownloadListAdapte
     protected class MyViewHolder extends RecyclerView.ViewHolder
     {
         private CheckBox mCheckBox;
-        private ProgressBar mPbBar;
         private ImageButton mIbStartOrPause;
         private ImageButton mIbDelete;
+        public ProgressBar mPbBar;
         private TextView mTvDownloadFileName;
 
         public MyViewHolder(View itemView)
@@ -70,6 +78,7 @@ public class DownloadListAdapter extends RecyclerView.Adapter<DownloadListAdapte
             mIbStartOrPause = (ImageButton) itemView.findViewById(R.id.ib_start_or_pause);
             mIbDelete = (ImageButton) itemView.findViewById(R.id.ib_delete);
             mTvDownloadFileName = (TextView) itemView.findViewById(R.id.tv_download_filename);
+            mPbBar.setMax(100);
         }
     }
 
@@ -91,32 +100,9 @@ public class DownloadListAdapter extends RecyclerView.Adapter<DownloadListAdapte
      */
     public void addTaskData(DownloadTaskInfo task)
     {
-//        for (int i=0;i<mList.size();i++)
-//        {
-//            if (mList.get(i).equals(task.getTaskID()))
-//            {
-//                mList.remove(i);
-//            }
-//        }
         mList.clear();
         mList.add(task);
-        Message message = Message.obtain();
-        message.what = UPDATE_BAR;
-        myHandler.sendMessage(message);
         this.notifyDataSetChanged();
     }
 
-    Handler myHandler = new Handler()
-    {
-        @Override
-        public void handleMessage(Message msg)
-        {
-            super.handleMessage(msg);
-            switch (msg.what)
-            {
-                case 0:
-                    break;
-            }
-        }
-    };
 }

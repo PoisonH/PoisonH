@@ -30,9 +30,12 @@
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:layout_centerVertical="true"
+        android:indeterminate="false"
+        android:indeterminateOnly="false"
+        android:progressDrawable="@drawable/progressbar_horizontal_1"
         android:layout_toLeftOf="@+id/ib_start_or_pause"
         android:layout_toRightOf="@+id/cb_checked"
-        android:background="@color/huise"/>
+        android:background="@color/white"/>
 
 
     <ImageButton

@@ -34,7 +34,7 @@ public class VideoDownloadUtils
             protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes)
             {
                 Log.i("VideoDownloadUtils", "progress");
-                if (System.currentTimeMillis() - time > 500)
+                if (System.currentTimeMillis() - time > 200)
                 {
                     time = System.currentTimeMillis();
                     Intent mIntent = new Intent();

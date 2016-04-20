@@ -44,8 +44,8 @@ public class VideoDownloadDialog extends DialogFragment implements RadioGroup.On
     {
         super.onViewCreated(view, savedInstanceState);
 
-        mListFragments.add(new DownloadedFragment());
         mListFragments.add(new DownloadingFragment());
+        mListFragments.add(new DownloadedFragment());
         mDownloadViewPagerAdapter = new DownloadViewPagerAdapter(getChildFragmentManager(), getActivity(), mListFragments);
         mRadioGroup = (RadioGroup) view.findViewById(R.id.rg_toggle);
         mViewPager = (ViewPager) view.findViewById(R.id.vp_download_pager);
