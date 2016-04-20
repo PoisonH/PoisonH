@@ -8,14 +8,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.poisonh.poisonh.R;
 import com.poisonh.poisonh.adapter.DownloadListAdapter;
+import com.poisonh.poisonh.bean.DownloadTaskInfo;
 import com.poisonh.poisonh.utils.AppConstant;
-import com.poisonh.poisonh.utils.VideoDownloadUtils;
 
 /**
  * Created by PoisonH on 2016/4/14.
@@ -33,6 +34,15 @@ public class DownloadingFragment extends Fragment
     }
 
     @Override
+    public void onStart()
+    {
+        super.onStart();
+        IntentFilter mIntentFilter = new IntentFilter();
+        mIntentFilter.addAction(AppConstant.VIDEO_DOWNDLOAD_BROADCAST);
+        getActivity().registerReceiver(mReceiver, mIntentFilter);
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
@@ -44,21 +54,24 @@ public class DownloadingFragment extends Fragment
         mRvDownloading.setAdapter(mDownloadListAdapter);
     }
 
-    BroadcastReceiver MyBroadcast = new BroadcastReceiver()
+    BroadcastReceiver mReceiver = new BroadcastReceiver()
     {
         @Override
         public void onReceive(Context context, Intent intent)
         {
-            String mStrVideoDownloadUrl = intent.getStringExtra("PlayUrl");
-            String mStrVideoName = intent.getStringExtra("VideoName");
-            VideoDownloadUtils.videoDownload(mStrVideoDownloadUrl, mStrVideoName);
+            int id = intent.getExtras().getInt(AppConstant.VIDEO_ID);
+            int soFarBytes = intent.getExtras().getInt(AppConstant.DOWNLOAD_soFarBytes);
+            int totalBytes = intent.getExtras().getInt(AppConstant.DOWNLOAD_totalBytes);
+            String mStrVideoName = intent.getExtras().getString(AppConstant.VIDEO_NAME);
+
+            DownloadTaskInfo mTaskInfo = new DownloadTaskInfo();
+            mTaskInfo.setTaskID(id);
+            mTaskInfo.setFileName(mStrVideoName);
+            mTaskInfo.setDownFileSize(soFarBytes);
+            mTaskInfo.setFileSize(totalBytes);
+            mDownloadListAdapter.addTaskData(mTaskInfo);
+            mDownloadListAdapter.notifyDataSetChanged();
+            Log.i("DownloadingFragment", "soFarBytes:" + soFarBytes + "///" + "totalBytes" + totalBytes);
         }
     };
-    public void registerBroadcase()
-    {
-        IntentFilter mIntentFilter = new IntentFilter();
-        mIntentFilter.addAction(AppConstant.VIDEO_DOWNDLOAD_BROADCAST);
-        getActivity().registerReceiver(MyBroadcast, mIntentFilter);
-    }
-
 }

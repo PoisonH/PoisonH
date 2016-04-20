@@ -140,10 +140,9 @@ public class VedioFragment extends BaseFragment implements VideoDataView, VideoL
         Bundle bundle = new Bundle();
         bundle.putString(AppConstant.VIDEO_PLAYURL, mVideoList.get(postion).getmStrPlayUrl());
         bundle.putString(AppConstant.VIDEO_NAME, mVideoList.get(postion).getmStrVideoTitle());
+        bundle.putInt(AppConstant.VIDEO_ID, Integer.parseInt(mVideoList.get(postion).getId()));
         mIntent.putExtras(bundle);
         mIntent.setClass(getActivity(), VideoPlayActivity.class);
-        DownloadingFragment fragment = new DownloadingFragment();
-        fragment.registerBroadcase();
         startActivity(mIntent);
     }
 

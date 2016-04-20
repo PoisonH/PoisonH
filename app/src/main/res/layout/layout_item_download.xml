@@ -14,11 +14,14 @@
     <TextView
         android:id="@+id/tv_download_filename"
         android:layout_width="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_toLeftOf="@+id/ib_start_or_pause"
         android:layout_toRightOf="@+id/cb_checked"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxEms="5"
+        android:singleLine="true"
         android:text="我是百思不得姐"
         android:textSize="12dp"/>
 

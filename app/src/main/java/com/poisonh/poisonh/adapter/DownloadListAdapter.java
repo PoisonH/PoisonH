@@ -1,6 +1,8 @@
 package com.poisonh.poisonh.adapter;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,7 @@ public class DownloadListAdapter extends RecyclerView.Adapter<DownloadListAdapte
 {
     private Context mContext;
     private List<DownloadTaskInfo> mList;
+    private static int UPDATE_BAR = 0;
 
     public DownloadListAdapter(Context context)
     {
@@ -40,6 +43,7 @@ public class DownloadListAdapter extends RecyclerView.Adapter<DownloadListAdapte
     public void onBindViewHolder(MyViewHolder holder, int position)
     {
         holder.mTvDownloadFileName.setText(mList.get(position).getFileName());
+        holder.mPbBar.setProgress(mList.get(position).getDownFileSize());
     }
 
     @Override
@@ -87,7 +91,32 @@ public class DownloadListAdapter extends RecyclerView.Adapter<DownloadListAdapte
      */
     public void addTaskData(DownloadTaskInfo task)
     {
+//        for (int i=0;i<mList.size();i++)
+//        {
+//            if (mList.get(i).equals(task.getTaskID()))
+//            {
+//                mList.remove(i);
+//            }
+//        }
+        mList.clear();
         mList.add(task);
+        Message message = Message.obtain();
+        message.what = UPDATE_BAR;
+        myHandler.sendMessage(message);
         this.notifyDataSetChanged();
     }
+
+    Handler myHandler = new Handler()
+    {
+        @Override
+        public void handleMessage(Message msg)
+        {
+            super.handleMessage(msg);
+            switch (msg.what)
+            {
+                case 0:
+                    break;
+            }
+        }
+    };
 }

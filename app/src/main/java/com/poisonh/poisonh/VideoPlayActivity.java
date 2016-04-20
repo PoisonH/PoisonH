@@ -1,6 +1,7 @@
 package com.poisonh.poisonh;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -19,8 +20,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.poisonh.poisonh.bean.DownloadFileInfo;
 import com.poisonh.poisonh.fragment.VedioFragment;
 import com.poisonh.poisonh.fragment.downloadfragment.DownloadingFragment;
+import com.poisonh.poisonh.service.DownloadService;
 import com.poisonh.poisonh.utils.AppConstant;
 import com.poisonh.poisonh.utils.FileManager;
 import com.poisonh.poisonh.utils.PlayerGesture;
@@ -68,6 +71,7 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
     private PlayerGesture mPlayerGesture;
     private String mStrPlayUrl;
     private String mStrVideoName;
+    private int mVideoId;
     private String name;// 视频名称
     private boolean isPlayComplete = false;// 是否播放完成
     private boolean isPlayError = false;// 是否播放出错
@@ -108,6 +112,7 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
         setContentView(R.layout.activity_player);
         mStrPlayUrl = this.getIntent().getExtras().getString(AppConstant.VIDEO_PLAYURL);
         mStrVideoName = this.getIntent().getExtras().getString(AppConstant.VIDEO_NAME);
+        mVideoId = this.getIntent().getExtras().getInt(AppConstant.VIDEO_ID);
         Log.i("VideoPlayActivity", mStrPlayUrl);
         mFindViewById();
         initVideoView();
@@ -522,7 +527,7 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
             case R.id.video_download:
                 //下载
                 ToastUtils.showToast(this, getString(R.string.joined_download_queue), Toast.LENGTH_SHORT);
-                sendDownloadOrder(mStrVideoName, mStrPlayUrl);
+                sendDownloadOrder(mVideoId, mStrVideoName, mStrPlayUrl);
                 break;
             default:
                 break;
@@ -535,15 +540,14 @@ public class VideoPlayActivity extends Activity implements View.OnClickListener
      * @param mStrVideoName 视频名字
      * @param mStrPlayUrl   下载地址
      */
-    private void sendDownloadOrder(String mStrVideoName, String mStrPlayUrl)
+    private void sendDownloadOrder(int id, String mStrVideoName, String mStrPlayUrl)
     {
-        Intent intent = new Intent();
-        intent.setAction(AppConstant.VIDEO_DOWNDLOAD_BROADCAST);
-        Bundle mBundle = new Bundle();
-        mBundle.putString("VideoName", mStrVideoName);
-        mBundle.putString("PlayUrl", mStrPlayUrl);
-        intent.putExtras(mBundle);
-        sendBroadcast(intent);
+        DownloadFileInfo mFileInfo = new DownloadFileInfo(id, mStrPlayUrl, mStrVideoName, 0, 0);
+        Intent mIntent = new Intent(VideoPlayActivity.this, DownloadService.class);
+        mIntent.setAction(AppConstant.DOWNLOAD_ACTION_START);
+        mIntent.putExtra(AppConstant.DOWNLOAD_FILEINFO, mFileInfo);
+        startService(mIntent);
+
     }
 
 

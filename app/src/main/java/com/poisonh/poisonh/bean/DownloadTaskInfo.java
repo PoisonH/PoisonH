@@ -9,13 +9,13 @@ public class DownloadTaskInfo
     //是否正在下载
     private boolean isOnDownloading;
     //任务id
-    private String taskID;
+    private int taskID;
     //任务名字
     private String fileName;
     //文件大小
-    private long fileSize = 0;
+    private int fileSize = 0;
     //下载大小
-    private long downFileSize = 0;
+    private int downFileSize = 0;
 
     public boolean isOnDownloading()
     {
@@ -39,12 +39,12 @@ public class DownloadTaskInfo
 
     }
 
-    public String getTaskID()
+    public int getTaskID()
     {
         return taskID;
     }
 
-    public void setTaskID(String taskID)
+    public void setTaskID(int taskID)
     {
         this.taskID = taskID;
     }
@@ -74,22 +74,22 @@ public class DownloadTaskInfo
         return type;
     }
 
-    public long getFileSize()
+    public int getFileSize()
     {
         return fileSize;
     }
 
-    public void setFileSize(long fileSize)
+    public void setFileSize(int fileSize)
     {
         this.fileSize = fileSize;
     }
 
-    public long getDownFileSize()
+    public int getDownFileSize()
     {
         return downFileSize;
     }
 
-    public void setDownFileSize(long downFileSize)
+    public void setDownFileSize(int downFileSize)
     {
         this.downFileSize = downFileSize;
     }
