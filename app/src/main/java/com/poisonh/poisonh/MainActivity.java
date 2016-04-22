@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.view.WindowManager;
 
 import com.poisonh.poisonh.base.BaseActivity;
 import com.poisonh.poisonh.fragment.BluetoothFragment;

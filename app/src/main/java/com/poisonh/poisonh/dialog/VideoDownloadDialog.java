@@ -1,4 +1,4 @@
-package com.poisonh.poisonh.fragment;
+package com.poisonh.poisonh.dialog;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;

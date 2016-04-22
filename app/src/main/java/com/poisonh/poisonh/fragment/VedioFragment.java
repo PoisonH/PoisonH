@@ -13,7 +13,7 @@ import com.poisonh.poisonh.R;
 import com.poisonh.poisonh.adapter.VideoListRVAdapter;
 import com.poisonh.poisonh.base.BaseFragment;
 import com.poisonh.poisonh.bean.VideoDataList;
-import com.poisonh.poisonh.fragment.downloadfragment.DownloadingFragment;
+import com.poisonh.poisonh.dialog.VideoDownloadDialog;
 import com.poisonh.poisonh.mvp.presenter.IVideoPresenter;
 import com.poisonh.poisonh.mvp.presenter.VideoPresenterImpl;
 import com.poisonh.poisonh.mvp.view.VideoDataView;
