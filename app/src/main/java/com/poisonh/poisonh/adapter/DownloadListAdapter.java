@@ -100,9 +100,25 @@ public class DownloadListAdapter extends RecyclerView.Adapter<DownloadListAdapte
      */
     public void addTaskData(DownloadTaskInfo task)
     {
-        mList.clear();
-        mList.add(task);
-        this.notifyDataSetChanged();
+        // mList.clear();
+        if (mList.size() == 0)
+        {
+            mList.add(task);
+        } else
+        {
+            for (int i = 0; i < mList.size(); i++)
+            {
+                Log.i("DownloadListAdapter", "task.getTaskID()" + task.getTaskID() + "+++" + "mListgetTaskID()" + mList.get(i).getTaskID());
+                if (task.getTaskID() == mList.get(i).getTaskID())
+                {
+                    mList.get(i).update(task.getDownFileSize());
+                    this.notifyDataSetChanged();
+                    return;
+                }
+            }
+            mList.add(task);
+            this.notifyDataSetChanged();
+        }
     }
 
 }

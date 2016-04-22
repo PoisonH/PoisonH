@@ -94,4 +94,9 @@ public class DownloadTaskInfo
         this.downFileSize = downFileSize;
     }
 
+    public void update(int downloadSize)
+    {
+        this.downFileSize = downloadSize;
+    }
+
 }

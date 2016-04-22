@@ -34,7 +34,7 @@ public class VideoDownloadUtils
             protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes)
             {
                 Log.i("VideoDownloadUtils", "progress");
-                if (System.currentTimeMillis() - time > 200)
+                if (System.currentTimeMillis() - time > 500)
                 {
                     time = System.currentTimeMillis();
                     Intent mIntent = new Intent();
@@ -101,4 +101,52 @@ public class VideoDownloadUtils
             return SDCardUtils.getRootDirectoryPath() + AppConstant.VIDEO_DOWNLOAD_PATH;
         }
     }
+
+    /**
+     * 启动多任务下载
+     */
+    final FileDownloadListener mFileDownloadListener = new FileDownloadListener()
+    {
+        @Override
+        protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes)
+        {
+
+        }
+
+        @Override
+        protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes)
+        {
+
+        }
+
+        @Override
+        protected void blockComplete(BaseDownloadTask task)
+        {
+
+        }
+
+        @Override
+        protected void completed(BaseDownloadTask task)
+        {
+
+        }
+
+        @Override
+        protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes)
+        {
+
+        }
+
+        @Override
+        protected void error(BaseDownloadTask task, Throwable e)
+        {
+
+        }
+
+        @Override
+        protected void warn(BaseDownloadTask task)
+        {
+
+        }
+    };
 }
