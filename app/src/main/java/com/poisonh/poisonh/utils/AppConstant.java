@@ -16,6 +16,20 @@ public class AppConstant
 
     public static final String DOWNLOAD_FILEINFO = "DOWNLOAD_FILEINFO";
 
-    public static final String DOWNLOAD_soFarBytes="DOWNLOAD_soFarBytes";
-    public static final String DOWNLOAD_totalBytes="DOWNLOAD_totalBytes";
+    public static final String DOWNLOAD_soFarBytes = "DOWNLOAD_soFarBytes";
+    public static final String DOWNLOAD_totalBytes = "DOWNLOAD_totalBytes";
+
+    // Message types sent from the BluetoothChatService Handler
+    public static final int MESSAGE_STATE_CHANGE = 1;
+    public static final int MESSAGE_READ = 2;
+    public static final int MESSAGE_WRITE = 3;
+    public static final int MESSAGE_DEVICE_NAME = 4;
+    public static final int MESSAGE_TOAST = 5;
+
+    // Key names received from the BluetoothChatService Handler
+    public static final String DEVICE_NAME = "device_name";
+    public static final String TOAST = "toast";
+
+    public static final String FRAGMENT_BACK_VALUE = "FRAGMENT_BACK_VALUE";
+    public static final String CONNECTION_BT = "CONNECTION_BT";
 }

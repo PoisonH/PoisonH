@@ -18,6 +18,15 @@
             android:text="未连接设备"
             android:textColor="@color/white"
             android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/tv_bt_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:text="未连接设备"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
 
         <ImageButton
             android:id="@+id/ib_contacts"

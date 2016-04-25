@@ -9,7 +9,9 @@ import android.content.IntentFilter;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,19 +21,25 @@ public class BluetoothUtils
 {
     private BluetoothAdapter mBluetoothAdapter;
     private Context mContext;
+    private List<BluetoothDevice> mDeviceList;
+
 
     public BluetoothUtils(Context context)
     {
         this.mContext = context;
-    }
-
-    public void SearchBluetooth()
-    {
         //获得默认蓝牙适配器
         if (mBluetoothAdapter == null)
         {
             mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         }
+        mDeviceList = new ArrayList<>();
+    }
+
+    /**
+     * 获得已经配对的蓝牙设备
+     */
+    public List<BluetoothDevice> getBondedDevice()
+    {
         if (!mBluetoothAdapter.isEnabled())
         {
             ToastUtils.showToast(mContext, "当前蓝牙不可用，请确认蓝牙是否打开", Toast.LENGTH_SHORT);
@@ -45,15 +53,22 @@ public class BluetoothUtils
                 for (Iterator mIterator = mSet.iterator(); mIterator.hasNext(); )
                 {
                     BluetoothDevice mDevice = (BluetoothDevice) mIterator.next();
-                    Log.i("BluetoothUtils", mDevice.getName());
+                    mDeviceList.add(mDevice);
                 }
             }
-            mBluetoothAdapter.startDiscovery();
-
-            IntentFilter mIntentFilter = new IntentFilter();
-            mIntentFilter.addAction(BluetoothDevice.ACTION_FOUND);
-            mContext.registerReceiver(mBluetoothBroacastReceiver, mIntentFilter);
         }
+        return mDeviceList;
+    }
+
+    /**
+     * 查找蓝牙设备
+     */
+    public void searchBluetoothDevices()
+    {
+        mBluetoothAdapter.startDiscovery();
+        IntentFilter mIntentFilter = new IntentFilter();
+        mIntentFilter.addAction(BluetoothDevice.ACTION_FOUND);
+        mContext.registerReceiver(mBluetoothBroacastReceiver, mIntentFilter);
     }
 
     BroadcastReceiver mBluetoothBroacastReceiver = new BroadcastReceiver()
