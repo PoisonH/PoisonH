@@ -17,33 +17,24 @@
             android:layout_centerVertical="true"
             android:text="未连接设备"
             android:textColor="@color/white"
-            android:textSize="16sp"/>
-        <TextView
-            android:id="@+id/tv_bt_state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_centerInParent="true"
-            android:text="未连接设备"
-            android:textColor="@color/white"
-            android:textSize="16sp"/>
+            android:textSize="14sp"/>
 
         <ImageButton
             android:id="@+id/ib_contacts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:background="@drawable/bluetooth_people"
-            android:layout_toLeftOf="@+id/ib_bluetoothsetting"/>
+            android:layout_toLeftOf="@+id/ib_bluetoothsetting"
+            android:background="@drawable/bluetooth_people"/>
 
         <ImageButton
             android:id="@+id/ib_bluetoothsetting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:background="@drawable/bluetooth_setting"
             android:layout_centerVertical="true"
-            android:layout_margin="15dp"/>
+            android:layout_margin="15dp"
+            android:background="@drawable/bluetooth_setting"/>
     </RelativeLayout>
 
 </android.support.v7.widget.Toolbar>

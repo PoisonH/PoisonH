@@ -49,8 +49,8 @@ public class BluetoothChatService
     private static final String NAME_INSECURE = "BluetoothChatInsecure";
 
     // Unique UUID for this application
-    private static final UUID MY_UUID_SECURE = UUID.fromString("fa87c0d0-afac-11de-8a39-0800200c9a66");
-    private static final UUID MY_UUID_INSECURE = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
+    private static final UUID MY_UUID_SECURE = UUID.fromString("99001ebe-b8d4-4e99-b7ec-90194fe6e27e");
+    private static final UUID MY_UUID_INSECURE = UUID.fromString("99001ebe-b8d4-4e99-b7ec-90194fe6e27e");
 
     // Member fields
     private final BluetoothAdapter mAdapter;
@@ -450,32 +450,26 @@ public class BluetoothChatService
             mAdapter.cancelDiscovery();
 
             // Make a connection to the BluetoothSocket
-            new Thread(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    try
-                    {
-                        // This is a blocking call and will only return on a
-                        // successful connection or an exception
-                        mmSocket.connect();
-                    } catch (IOException e)
-                    {
-                        // Close the socket
-                        try
-                        {
-                            mmSocket.close();
-                        } catch (IOException e2)
-                        {
-                            Log.e(TAG, "unable to close() " + mSocketType + " socket during connection failure", e2);
-                        }
-                        connectionFailed();
-                        return;
-                    }
-                }
-            }).start();
 
+            try
+            {
+                // This is a blocking call and will only return on a
+                // successful connection or an exception
+                mmSocket.connect();
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+                // Close the socket
+                try
+                {
+                    mmSocket.close();
+                } catch (IOException e2)
+                {
+                    Log.e(TAG, "unable to close() " + mSocketType + " socket during connection failure", e2);
+                }
+                connectionFailed();
+                return;
+            }
             // Reset the ConnectThread because we're done
             synchronized (BluetoothChatService.this)
             {

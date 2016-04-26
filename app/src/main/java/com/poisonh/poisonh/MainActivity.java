@@ -6,11 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
-import android.view.WindowManager;
 
 import com.poisonh.poisonh.base.BaseActivity;
-import com.poisonh.poisonh.fragment.BluetoothFragment;
+import com.poisonh.poisonh.fragment.BluetoothChatFragment;
 import com.poisonh.poisonh.fragment.LocationFragment;
 import com.poisonh.poisonh.fragment.MusicFragment;
 import com.poisonh.poisonh.fragment.NewsFragment;
@@ -100,7 +98,7 @@ public class MainActivity extends BaseActivity
                 if (mBluetoothFragment == null)
                 {
                     // 如果mBluetoothFragment为空，则创建一个并添加到界面上
-                    mBluetoothFragment = new BluetoothFragment();
+                    mBluetoothFragment = new BluetoothChatFragment();
                     transaction.add(R.id.fl_content, mBluetoothFragment);
                 } else
                 {

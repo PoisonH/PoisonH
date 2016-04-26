@@ -61,7 +61,8 @@ public class ContactsDialog extends DialogFragment implements BTBondedDeviceAdap
         //ToastUtils.showToast(getActivity(), "你点击了：" + mBondedDeviceList.get(poision).getAddress(), Toast.LENGTH_SHORT);
         Intent mIntent = new Intent();
         mIntent.setAction(AppConstant.CONNECTION_BT);
-        mIntent.putExtra(AppConstant.FRAGMENT_BACK_VALUE, mBondedDeviceList.get(poision).getAddress());
+        mIntent.putExtra(AppConstant.CONNECTION_BT_ADDRESS, mBondedDeviceList.get(poision).getAddress());
+        mIntent.putExtra(AppConstant.CONNECTION_BT_NAME, mBondedDeviceList.get(poision).getName());
         getActivity().sendBroadcast(mIntent);
     }
 

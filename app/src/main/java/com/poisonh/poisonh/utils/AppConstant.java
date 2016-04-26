@@ -30,6 +30,7 @@ public class AppConstant
     public static final String DEVICE_NAME = "device_name";
     public static final String TOAST = "toast";
 
-    public static final String FRAGMENT_BACK_VALUE = "FRAGMENT_BACK_VALUE";
+    public static final String CONNECTION_BT_ADDRESS = "CONNECTION_BT_ADDRESS";
+    public static final String CONNECTION_BT_NAME = "CONNECTION_BT_NAME";
     public static final String CONNECTION_BT = "CONNECTION_BT";
 }
