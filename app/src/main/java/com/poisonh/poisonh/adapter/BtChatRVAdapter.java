@@ -38,11 +38,17 @@ public class BtChatRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     {
         if (holder instanceof LeftViewHolder)
         {
-            ((LeftViewHolder) holder).mTvLsftContent.setText(mChatDataList.get(position).getContent());
+            if (mChatDataList != null)
+            {
+                ((LeftViewHolder) holder).mTvLsftContent.setText(mChatDataList.get(position).getContent());
+            }
         }
         if (holder instanceof RightViewHolder)
         {
-            ((RightViewHolder) holder).mTvRightContent.setText(mChatDataList.get(position).getContent());
+            if (mChatDataList != null)
+            {
+                ((RightViewHolder) holder).mTvRightContent.setText(mChatDataList.get(position).getContent());
+            }
         }
     }
 
@@ -51,12 +57,18 @@ public class BtChatRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     {
         if (viewType == ChatDataList.RECEIVER)
         {
-            new LeftViewHolder(LayoutInflater.from(mContext).inflate(R.layout.layout_item_chat_left, null));
+            return new LeftViewHolder(LayoutInflater.from(mContext).inflate(R.layout.layout_item_chat_left, null));
         } else if (viewType == ChatDataList.SEND)
         {
-            new RightViewHolder(LayoutInflater.from(mContext).inflate(R.layout.layout_item_chat_right, null));
+            return new RightViewHolder(LayoutInflater.from(mContext).inflate(R.layout.layout_item_chat_right, null));
         }
         return null;
+    }
+
+    @Override
+    public int getItemViewType(int position)
+    {
+        return mChatDataList.get(position).getFlag();
     }
 
     public class LeftViewHolder extends RecyclerView.ViewHolder
@@ -83,7 +95,7 @@ public class BtChatRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public void setData(ChatDataList item)
     {
-        mChatDataList.add(item);
+        mChatDataList.add(0,item);
         this.notifyDataSetChanged();
     }
 }

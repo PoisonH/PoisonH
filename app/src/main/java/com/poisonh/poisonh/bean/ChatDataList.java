@@ -5,8 +5,8 @@ package com.poisonh.poisonh.bean;
  */
 public class ChatDataList
 {
-    public static final int SEND = 1;
-    public static final int RECEIVER = 2;
+    public static final int SEND = 0;
+    public static final int RECEIVER = 1;
     private String content;
     private String time;
     private int flag;

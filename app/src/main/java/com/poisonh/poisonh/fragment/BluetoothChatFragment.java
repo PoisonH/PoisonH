@@ -87,6 +87,9 @@ public class BluetoothChatFragment extends BaseFragment implements View.OnClickL
         mBtChatRVAdapter = new BtChatRVAdapter(getActivity());
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
+        //底部填充数据
+        manager.setReverseLayout(true);
+       // manager.setStackFromEnd();
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(mBtChatRVAdapter);
     }
@@ -190,17 +193,20 @@ public class BluetoothChatFragment extends BaseFragment implements View.OnClickL
                     byte[] writeBuf = (byte[]) msg.obj;
                     // construct a string from the buffer
                     String writeMessage = new String(writeBuf);
-                    ChatDataList mChatDataList = new ChatDataList(writeMessage, 1, null);
+                    ChatDataList mChatDataList = new ChatDataList(writeMessage, ChatDataList.SEND, null);
                     mBtChatRVAdapter.setData(mChatDataList);
                     mBtChatRVAdapter.notifyDataSetChanged();
+                    mRecyclerView.smoothScrollToPosition(mBtChatRVAdapter.getItemCount() - 1);
+                    mEtChatContent.setText("");
                     break;
                 case AppConstant.MESSAGE_READ:
                     byte[] readBuf = (byte[]) msg.obj;
                     // construct a string from the valid bytes in the buffer
                     String readMessage = new String(readBuf);
-                    ChatDataList mChatread = new ChatDataList(readMessage, 2, null);
+                    ChatDataList mChatread = new ChatDataList(readMessage, ChatDataList.RECEIVER, null);
                     mBtChatRVAdapter.setData(mChatread);
                     mBtChatRVAdapter.notifyDataSetChanged();
+                    mRecyclerView.smoothScrollToPosition(mBtChatRVAdapter.getItemCount() - 1);
                     break;
                 case AppConstant.MESSAGE_DEVICE_NAME:
                     // save the connected device's name
