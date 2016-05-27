@@ -72,8 +72,8 @@ public class BluetoothChatFragment extends BaseFragment implements View.OnClickL
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
-        mChatService = new BluetoothChatService(getActivity(), mHandler);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mChatService = new BluetoothChatService(getActivity(), mHandler);
         mTvLinkMan = (TextView) view.findViewById(R.id.tv_linkman);
         mIbContacts = (ImageButton) view.findViewById(R.id.ib_contacts);
         mIbBluetoothSetting = (ImageButton) view.findViewById(R.id.ib_bluetoothsetting);
@@ -89,7 +89,6 @@ public class BluetoothChatFragment extends BaseFragment implements View.OnClickL
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         //底部填充数据
         manager.setReverseLayout(true);
-       // manager.setStackFromEnd();
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(mBtChatRVAdapter);
     }
@@ -196,7 +195,6 @@ public class BluetoothChatFragment extends BaseFragment implements View.OnClickL
                     ChatDataList mChatDataList = new ChatDataList(writeMessage, ChatDataList.SEND, null);
                     mBtChatRVAdapter.setData(mChatDataList);
                     mBtChatRVAdapter.notifyDataSetChanged();
-                    mRecyclerView.smoothScrollToPosition(mBtChatRVAdapter.getItemCount() - 1);
                     mEtChatContent.setText("");
                     break;
                 case AppConstant.MESSAGE_READ:
@@ -206,7 +204,6 @@ public class BluetoothChatFragment extends BaseFragment implements View.OnClickL
                     ChatDataList mChatread = new ChatDataList(readMessage, ChatDataList.RECEIVER, null);
                     mBtChatRVAdapter.setData(mChatread);
                     mBtChatRVAdapter.notifyDataSetChanged();
-                    mRecyclerView.smoothScrollToPosition(mBtChatRVAdapter.getItemCount() - 1);
                     break;
                 case AppConstant.MESSAGE_DEVICE_NAME:
                     // save the connected device's name

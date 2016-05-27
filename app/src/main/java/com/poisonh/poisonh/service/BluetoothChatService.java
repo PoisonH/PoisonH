@@ -160,11 +160,11 @@ public class BluetoothChatService
         }
 
         // Cancel any thread currently running a connection
-        if (mConnectedThread != null)
-        {
-            mConnectedThread.cancel();
-            mConnectedThread = null;
-        }
+//        if (mConnectedThread != null)
+//        {
+//            mConnectedThread.cancel();
+//            mConnectedThread = null;
+//        }
 
         // Start the thread to connect with the given device
         mConnectThread = new ConnectThread(device, secure);
